@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Alfalfas</key>
+	<array>
+		<string>Sprouts</string>
+		<string>Kale</string>
+	</array>
+	<key>Costco</key>
+	<array>
+		<string>Bulk Water</string>
+	</array>
+	<key>King Soopers</key>
+	<array>
+		<string>Milk</string>
+		<string>Butter</string>
+	</array>
+	<key>Kmart</key>
+	<array>
+		<string>Toy</string>
+	</array>
+</dict>
+</plist>
