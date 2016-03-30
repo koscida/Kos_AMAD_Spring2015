@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Girl Scout</key>
+	<array>
+		<string>Thin Mints</string>
+		<string>Tagalongs</string>
+	</array>
+	<key>Oreo</key>
+	<array>
+		<string>Regular</string>
+		<string>Double Stuffed</string>
+	</array>
+	<key>Chocolate Chip</key>
+	<array>
+		<string>Homemade</string>
+	</array>
+</dict>
+</plist>
