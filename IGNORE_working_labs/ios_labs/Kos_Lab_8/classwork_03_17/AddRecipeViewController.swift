@@ -28,6 +28,8 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITableV
     
     
     
+    
+    
     // MARK: - Table view data source
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -43,8 +45,12 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("recipeCell", forIndexPath: indexPath)
         
-        let ing = recipe.ingredients[indexPath.row]
-        cell.textLabel!.text = ing["ingredient"]
+        let ingredient = recipe.ingredients[indexPath.row]
+        cell.textLabel!.text = ingredient["ingredient"]
+        cell.detailTextLabel?.text = ingredient["amount"]
+        
+        //print("recipe.ingredients: ")
+        //print(recipe.ingredients)
         
         return cell
     }
@@ -56,9 +62,13 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITableV
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(nameText.text?.isEmpty == false) {
-            recipe.name = nameText.text!
+        
+        if(segue.identifier == "saveAddRecipe") {
+            if(nameText.text?.isEmpty == false) {
+                recipe.name = nameText.text!
+            }
         }
+        
     }
     
     @IBAction func cancelAddIngredient(segue:UIStoryboardSegue) {
@@ -69,11 +79,10 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITableV
         
         let newIngredient = source.newIngredient
         
-        // check fields
-        if newIngredient["ingredient"]!.isEmpty == false {
-            //add recipe to recipes array
-            recipe.ingredients.append(newIngredient as! [String : String])
-        }
+        //add recipe to recipes array
+        recipe.ingredients.append(newIngredient as! [String : String])
+        
+        self.tableView.reloadData()
 
     }
     
