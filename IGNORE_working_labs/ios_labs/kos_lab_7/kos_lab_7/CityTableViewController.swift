@@ -10,13 +10,11 @@ import UIKit
 
 class CityTableViewController: UITableViewController {
 
-    var country = Country()
-    var apiKey = "208df7dbccb3da755cdf0bd3b917afdd"
+    var country = Country()    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
 
@@ -34,16 +32,15 @@ class CityTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return country.cCities.count
+        return country.cities.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cityCell", forIndexPath: indexPath)
 
-        let city = country.cCities[indexPath.row]
-        cell.textLabel?.text = city.cName
+        let city = country.cities[indexPath.row]
+        cell.textLabel?.text = city.name
 
         return cell
     }
@@ -84,14 +81,22 @@ class CityTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        if(segue.identifier == "showWeatherSegue") {
+            let destination = segue.destinationViewController as! WeatherViewController
+            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
+            
+            let selectedCity = country.cities[indexPath.row]
+            
+            destination.city = selectedCity
+        }
+        
     }
-    */
+    
 
 }

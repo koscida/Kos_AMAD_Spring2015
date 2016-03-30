@@ -11,17 +11,17 @@ import UIKit
 
 class City {
     
-    var cId: Int = 0
-    var cName: String = ""
-    var cLon: Float = 0
-    var cLat: Float = 0
+    var id: Int = 0
+    var name: String = ""
+    var lon: Float = 0
+    var lat: Float = 0
     
     init() {}
     
-    init(id: Int, name: String, lon: Float, lat: Float) {
-        cId = id
-        cName = name
-        cLon = lon
-        cLat = lat
+    init(countryId: Int, countryName: String, countryLon: Float, countryLat: Float) {
+        id = countryId
+        name = countryName
+        lon = countryLon
+        lat = countryLat
     }
 }

@@ -11,15 +11,15 @@ import UIKit
 
 class Country {
     
-    var cName: String = ""
-    var cCities = [City]()
+    var name: String = ""
+    var cities = [City]()
     
     init() {}
     
     
-    init(name: String, cities : [City]) {
-        cName = name
-        cCities = cities
+    init(countryName: String, countryCities : [City]) {
+        name = countryName
+        cities = countryCities
     }
     
 }

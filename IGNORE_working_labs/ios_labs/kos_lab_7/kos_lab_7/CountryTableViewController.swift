@@ -28,7 +28,7 @@ class CountryTableViewController: UITableViewController {
     }
     
     func loadCountriesFile() {
-        print("in loadCountriesFile()")
+        //print("in loadCountriesFile()")
         // get data
         let filePath = NSBundle.mainBundle().pathForResource("city.list",ofType:"json")
         let data = NSData(contentsOfFile: filePath!)
@@ -44,32 +44,38 @@ class CountryTableViewController: UITableViewController {
         //print(json)
         
         // parse json, store in tmp
-        var tmp_countries = [String: Country]()
+        var countriesDict = [String: Country]()
         for city in json {
-            // get city data
+            // get city's country data
             let cityCountry = city["country"] as! String
             
             // create a new city
-            let newCity = City(id: city["_id"] as! Int, name: city["name"] as! String, lon: city["coord"]!["lon"] as! Float, lat: city["coord"]!["lat"] as! Float)
+            let newCity = City(countryId: city["_id"] as! Int, countryName: city["name"] as! String, countryLon: city["coord"]!["lon"] as! Float, countryLat: city["coord"]!["lat"] as! Float)
             
-            // test country
-            if tmp_countries[cityCountry] == nil {
-                let newCountry = Country(name: cityCountry, cities: [])
-                tmp_countries[cityCountry] = newCountry
+            // test if country exists
+            if countriesDict[cityCountry] == nil {
+                let newCountry = Country(countryName: cityCountry, countryCities: [])
+                countriesDict[cityCountry] = newCountry
             }
             
-            tmp_countries[cityCountry]?.cCities.append(newCity)
+            countriesDict[cityCountry]?.cities.append(newCity)
         }
-        print(tmp_countries)
+        
+        // alphabetize dict
+        let countriesDictSorted = countriesDict.sort{$0.0 < $1.0}
         
         // go through tmp, store in perm
-        for c in tmp_countries {
+        for c in countriesDictSorted {
+            // sort cities
+            c.1.cities.sortInPlace({ $0.name < $1.name })
+            
+            // append country
             countries.append(c.1)
         }
 
         
         tableView.reloadData()
-        print("exit loadCountriesFile()")
+        //print("exit loadCountriesFile()")
     }
 
     // MARK: - Table view data source
@@ -87,7 +93,7 @@ class CountryTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("countryCell", forIndexPath: indexPath)
 
         let country = countries[indexPath.row]
-        cell.textLabel?.text = country.cName
+        cell.textLabel?.text = country.name
 
         return cell
     }
@@ -128,14 +134,23 @@ class CountryTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if(segue.identifier == "showCitiesSegue") {
+            let destination = segue.destinationViewController as! CityTableViewController
+            let indexPath = tableView.indexPathForCell(sender as! UITableViewCell)!
+            
+            let selectedCountry = countries[indexPath.row]
+            
+            destination.country = selectedCountry
+        }
     }
-    */
+    
 
 }
