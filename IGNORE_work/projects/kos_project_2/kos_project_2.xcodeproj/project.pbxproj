@@ -13,6 +13,7 @@
 		BBF78FEA1CABD3ED001CF5DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF78FE81CABD3ED001CF5DE /* Main.storyboard */; };
 		BBF78FEC1CABD3ED001CF5DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBF78FEB1CABD3ED001CF5DE /* Assets.xcassets */; };
 		BBF78FEF1CABD3ED001CF5DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBF78FED1CABD3ED001CF5DE /* LaunchScreen.storyboard */; };
+		BBF78FF71CAC435B001CF5DE /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF78FF61CAC435B001CF5DE /* GameScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		BBF78FEB1CABD3ED001CF5DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBF78FEE1CABD3ED001CF5DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBF78FF01CABD3ED001CF5DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BBF78FF61CAC435B001CF5DE /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				BBF78FEB1CABD3ED001CF5DE /* Assets.xcassets */,
 				BBF78FED1CABD3ED001CF5DE /* LaunchScreen.storyboard */,
 				BBF78FE81CABD3ED001CF5DE /* Main.storyboard */,
+				BBF78FF61CAC435B001CF5DE /* GameScene.swift */,
 			);
 			path = kos_project_2;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBF78FF71CAC435B001CF5DE /* GameScene.swift in Sources */,
 				BBF78FE71CABD3ED001CF5DE /* GameViewController.swift in Sources */,
 				BBF78FE31CABD3ED001CF5DE /* AppDelegate.swift in Sources */,
 			);

@@ -55,7 +55,7 @@ class GameViewController: UIViewController {
 
         
         
-        
+        /*
         
         let scene = GameIntroScene(size: view.frame.size)
         
@@ -68,12 +68,44 @@ class GameViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         
         /* Set the scale mode to scale to fit the window */
-        scene.scaleMode = .AspectFill
+        scene.scaleMode = .ResizeFill
         
         skView.presentScene(scene)
 
-        
+        */
     }
+    
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews();
+        
+        // Configure the view
+        let skView = self.view as! SKView
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        
+        // Sprite Kit applies additional optimizations to improve rendering performance
+        skView.ignoresSiblingOrder = true
+        
+        
+        // get scene file
+        let scene = GameIntroScene(size: view.frame.size)
+        
+        // get scaling factor
+        let scale:CGFloat = UIScreen.mainScreen().scale;
+        let size = CGSizeMake(skView.frame.size.width*scale, skView.frame.size.height*scale)
+        
+        // Configure the scene
+        scene.scaleMode = .AspectFill
+        scene.size = size
+        
+        
+        // final present scene
+        skView.presentScene(scene)
+    }
+    
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
