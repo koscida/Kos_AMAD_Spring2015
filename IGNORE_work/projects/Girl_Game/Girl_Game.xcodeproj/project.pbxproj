@@ -17,6 +17,7 @@
 		0385302D1CB5E6CA003C0C9E /* GameCharacterCreationScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385302C1CB5E6CA003C0C9E /* GameCharacterCreationScene.swift */; };
 		0385302F1CB5E7E5003C0C9E /* GameIntroScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385302E1CB5E7E5003C0C9E /* GameIntroScene.swift */; };
 		038530311CB5E831003C0C9E /* GameEndScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038530301CB5E831003C0C9E /* GameEndScene.swift */; };
+		038530341CBDAFD7003C0C9E /* GameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038530331CBDAFD7003C0C9E /* GameHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		0385302C1CB5E6CA003C0C9E /* GameCharacterCreationScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCharacterCreationScene.swift; sourceTree = "<group>"; };
 		0385302E1CB5E7E5003C0C9E /* GameIntroScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameIntroScene.swift; sourceTree = "<group>"; };
 		038530301CB5E831003C0C9E /* GameEndScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEndScene.swift; sourceTree = "<group>"; };
+		038530331CBDAFD7003C0C9E /* GameHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				038530261CB59E68003C0C9E /* Info.plist */,
 				038530161CB59E68003C0C9E /* AppDelegate.swift */,
 				0385301C1CB59E68003C0C9E /* GameViewController.swift */,
+				038530331CBDAFD7003C0C9E /* GameHelper.swift */,
 				038530211CB59E68003C0C9E /* Assets.xcassets */,
 				038530231CB59E68003C0C9E /* LaunchScreen.storyboard */,
 				0385301E1CB59E68003C0C9E /* Main.storyboard */,
@@ -163,6 +166,7 @@
 				0385301D1CB59E68003C0C9E /* GameViewController.swift in Sources */,
 				0385302F1CB5E7E5003C0C9E /* GameIntroScene.swift in Sources */,
 				0385302D1CB5E6CA003C0C9E /* GameCharacterCreationScene.swift in Sources */,
+				038530341CBDAFD7003C0C9E /* GameHelper.swift in Sources */,
 				038530311CB5E831003C0C9E /* GameEndScene.swift in Sources */,
 				038530171CB59E68003C0C9E /* AppDelegate.swift in Sources */,
 			);
@@ -314,6 +318,7 @@
 				0385302B1CB59E68003C0C9E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
