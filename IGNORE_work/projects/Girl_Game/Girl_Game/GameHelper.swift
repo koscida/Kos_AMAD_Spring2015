@@ -28,10 +28,15 @@ let greyMediumColor = UIColor(white: 127/255, alpha: 1.0)
 
 
 
+func getUIColor(r r: CGFloat, g: CGFloat, b:CGFloat) -> UIColor {
+    return UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1)
+}
 
-//////////////////////////////////////////
-//          Helper Functions            //
-//////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////
+//          Helper Functions - CREATE LABEL            //
+/////////////////////////////////////////////////////////
 func adjustLabelFontSizeToFitRect(labelNode labelNode:SKLabelNode, rect:CGRect) {
     //http://stackoverflow.com/questions/30980918/how-to-set-font-size-of-sklabelnode-to-fit-in-fixed-size-swift
     
@@ -40,9 +45,9 @@ func adjustLabelFontSizeToFitRect(labelNode labelNode:SKLabelNode, rect:CGRect) 
     //print("scalingFactor: \(scalingFactor)")
     
     // Change the fontSize.
-    print("fontSize before: \(labelNode.fontSize)")
+    //print("fontSize before: \(labelNode.fontSize)")
     labelNode.fontSize *= scalingFactor
-    print("fontSize after: \(labelNode.fontSize)")
+    //print("fontSize after: \(labelNode.fontSize)")
     
     // Optionally move the SKLabelNode to the center of the rectangle.
     //labelNode.position = CGPoint(x: rect.midX, y: rect.midY - labelNode.frame.height / 2.0)
@@ -110,6 +115,9 @@ func createSKLabelNodeAdj(
 
 
 
+/////////////////////////////////////////////////////////
+//          Helper Functions - CREATE SHAPE            //
+/////////////////////////////////////////////////////////
 
 // base
 func createSKShapeNodeRect(name name: String, rect: CGRect, fillColor:  UIColor) -> SKShapeNode {
@@ -124,6 +132,5 @@ func createSKShapeNodeRect(name name: String, rect: CGRect, fillColor:  UIColor)
 
 
 
-func getUIColor(r r: CGFloat, g: CGFloat, b:CGFloat) -> UIColor {
-    return UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1)
-}
+
+

@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 
+/*
 extension SKNode {
     class func unarchiveFromFile(file : NSString) -> SKNode? {
         if let path = NSBundle.mainBundle().pathForResource(file as String, ofType: "sks") {
@@ -31,7 +32,8 @@ extension SKNode {
         }
         return nil
     }
-}   
+}  
+*/
 
 class GameViewController: UIViewController {
 
@@ -93,7 +95,8 @@ class GameViewController: UIViewController {
         
         // get scene file
         //let scene = GameIntroScene(size: view.frame.size)
-        let scene = GameCharacterCreationScene(size: view.frame.size)
+        //let scene = GameCharacterCreationScene(size: view.frame.size)
+        let scene = GameLevel1Scene(size: view.frame.size)
         
         // get scaling factor
         let scale:CGFloat = UIScreen.mainScreen().scale;

@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		038530171CB59E68003C0C9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038530161CB59E68003C0C9E /* AppDelegate.swift */; };
-		038530191CB59E68003C0C9E /* GameLevelScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 038530181CB59E68003C0C9E /* GameLevelScene.sks */; };
-		0385301B1CB59E68003C0C9E /* GameLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385301A1CB59E68003C0C9E /* GameLevelScene.swift */; };
+		0385301B1CB59E68003C0C9E /* GameLevel1Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385301A1CB59E68003C0C9E /* GameLevel1Scene.swift */; };
 		0385301D1CB59E68003C0C9E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385301C1CB59E68003C0C9E /* GameViewController.swift */; };
 		038530201CB59E68003C0C9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0385301E1CB59E68003C0C9E /* Main.storyboard */; };
 		038530221CB59E68003C0C9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 038530211CB59E68003C0C9E /* Assets.xcassets */; };
@@ -18,13 +17,16 @@
 		0385302F1CB5E7E5003C0C9E /* GameIntroScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0385302E1CB5E7E5003C0C9E /* GameIntroScene.swift */; };
 		038530311CB5E831003C0C9E /* GameEndScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038530301CB5E831003C0C9E /* GameEndScene.swift */; };
 		038530341CBDAFD7003C0C9E /* GameHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038530331CBDAFD7003C0C9E /* GameHelper.swift */; };
+		BBEDCB8D1CBEDFD000C2F456 /* MySKLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEDCB8C1CBEDFD000C2F456 /* MySKLabelNode.swift */; };
+		BBEDCB8F1CBEE18700C2F456 /* CreationOptionCharacterSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEDCB8E1CBEE18700C2F456 /* CreationOptionCharacterSprite.swift */; };
+		BBEDCB911CBEE1CF00C2F456 /* MySKShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEDCB901CBEE1CF00C2F456 /* MySKShapeNode.swift */; };
+		BBEDCB931CBFB66A00C2F456 /* CreateLevelSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEDCB921CBFB66A00C2F456 /* CreateLevelSpriteNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		038530131CB59E68003C0C9E /* Girl_Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Girl_Game.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		038530161CB59E68003C0C9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		038530181CB59E68003C0C9E /* GameLevelScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameLevelScene.sks; sourceTree = "<group>"; };
-		0385301A1CB59E68003C0C9E /* GameLevelScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLevelScene.swift; sourceTree = "<group>"; };
+		0385301A1CB59E68003C0C9E /* GameLevel1Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLevel1Scene.swift; sourceTree = "<group>"; };
 		0385301C1CB59E68003C0C9E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		0385301F1CB59E68003C0C9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		038530211CB59E68003C0C9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -34,6 +36,10 @@
 		0385302E1CB5E7E5003C0C9E /* GameIntroScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameIntroScene.swift; sourceTree = "<group>"; };
 		038530301CB5E831003C0C9E /* GameEndScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEndScene.swift; sourceTree = "<group>"; };
 		038530331CBDAFD7003C0C9E /* GameHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHelper.swift; sourceTree = "<group>"; };
+		BBEDCB8C1CBEDFD000C2F456 /* MySKLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySKLabelNode.swift; sourceTree = "<group>"; };
+		BBEDCB8E1CBEE18700C2F456 /* CreationOptionCharacterSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreationOptionCharacterSprite.swift; sourceTree = "<group>"; };
+		BBEDCB901CBEE1CF00C2F456 /* MySKShapeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySKShapeNode.swift; sourceTree = "<group>"; };
+		BBEDCB921CBFB66A00C2F456 /* CreateLevelSpriteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateLevelSpriteNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,11 +74,12 @@
 			children = (
 				038530261CB59E68003C0C9E /* Info.plist */,
 				038530161CB59E68003C0C9E /* AppDelegate.swift */,
-				0385301C1CB59E68003C0C9E /* GameViewController.swift */,
 				038530331CBDAFD7003C0C9E /* GameHelper.swift */,
+				0385301C1CB59E68003C0C9E /* GameViewController.swift */,
 				038530211CB59E68003C0C9E /* Assets.xcassets */,
 				038530231CB59E68003C0C9E /* LaunchScreen.storyboard */,
 				0385301E1CB59E68003C0C9E /* Main.storyboard */,
+				BBEDCB8B1CBEDFB300C2F456 /* Models */,
 				038530321CB5F632003C0C9E /* Scenes */,
 			);
 			path = Girl_Game;
@@ -81,13 +88,23 @@
 		038530321CB5F632003C0C9E /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				038530181CB59E68003C0C9E /* GameLevelScene.sks */,
-				0385301A1CB59E68003C0C9E /* GameLevelScene.swift */,
+				0385301A1CB59E68003C0C9E /* GameLevel1Scene.swift */,
 				0385302C1CB5E6CA003C0C9E /* GameCharacterCreationScene.swift */,
 				0385302E1CB5E7E5003C0C9E /* GameIntroScene.swift */,
 				038530301CB5E831003C0C9E /* GameEndScene.swift */,
 			);
 			name = Scenes;
+			sourceTree = "<group>";
+		};
+		BBEDCB8B1CBEDFB300C2F456 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BBEDCB8C1CBEDFD000C2F456 /* MySKLabelNode.swift */,
+				BBEDCB8E1CBEE18700C2F456 /* CreationOptionCharacterSprite.swift */,
+				BBEDCB901CBEE1CF00C2F456 /* MySKShapeNode.swift */,
+				BBEDCB921CBFB66A00C2F456 /* CreateLevelSpriteNode.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,7 +165,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				038530191CB59E68003C0C9E /* GameLevelScene.sks in Resources */,
 				038530251CB59E68003C0C9E /* LaunchScreen.storyboard in Resources */,
 				038530221CB59E68003C0C9E /* Assets.xcassets in Resources */,
 				038530201CB59E68003C0C9E /* Main.storyboard in Resources */,
@@ -162,13 +178,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0385301B1CB59E68003C0C9E /* GameLevelScene.swift in Sources */,
+				0385301B1CB59E68003C0C9E /* GameLevel1Scene.swift in Sources */,
+				BBEDCB931CBFB66A00C2F456 /* CreateLevelSpriteNode.swift in Sources */,
 				0385301D1CB59E68003C0C9E /* GameViewController.swift in Sources */,
 				0385302F1CB5E7E5003C0C9E /* GameIntroScene.swift in Sources */,
 				0385302D1CB5E6CA003C0C9E /* GameCharacterCreationScene.swift in Sources */,
+				BBEDCB8F1CBEE18700C2F456 /* CreationOptionCharacterSprite.swift in Sources */,
 				038530341CBDAFD7003C0C9E /* GameHelper.swift in Sources */,
+				BBEDCB8D1CBEDFD000C2F456 /* MySKLabelNode.swift in Sources */,
 				038530311CB5E831003C0C9E /* GameEndScene.swift in Sources */,
 				038530171CB59E68003C0C9E /* AppDelegate.swift in Sources */,
+				BBEDCB911CBEE1CF00C2F456 /* MySKShapeNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
