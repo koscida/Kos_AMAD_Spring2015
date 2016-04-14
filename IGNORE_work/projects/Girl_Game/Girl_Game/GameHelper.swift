@@ -25,6 +25,7 @@ let limeColor = UIColor(red: 246/255, green: 252/255, blue: 64/255, alpha: 1.0)
 
 let greyLightColor = UIColor(white: 203/255, alpha: 1.0)
 let greyMediumColor = UIColor(white: 127/255, alpha: 1.0)
+let greyDarkColor = UIColor(white: 89/255, alpha: 1.0)
 
 
 

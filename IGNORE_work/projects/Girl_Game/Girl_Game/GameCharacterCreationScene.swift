@@ -396,14 +396,28 @@ class GameCharacterCreationScene: SKScene {
                     
                 } else if name == "randomButton" || name == "randomButtonLabel" {
                     //print("randomButton or randomButtonLabel")
+                    changeOptionDetailView(BODY_OPTION)
+                    
+                    let bodySelectedIndexNew = Int(arc4random_uniform(UInt32(bodySpritesArray.count)))
+                    //print("bodySelectedIndexNew: \(bodySelectedIndexNew)")
+                    selectBodyOption(bodySelectedIndexNew)
+                    
+                    let armorSelectedIndexNew = Int(arc4random_uniform(UInt32(armorSpritesArray.count)))
+                    //print("armorSelectedIndexNew: \(armorSelectedIndexNew)")
+                    selectArmorOption(armorSelectedIndexNew)
+                    
+                    let weaponSelectedIndexNew = Int(arc4random_uniform(UInt32(weaponSpritesArray.count)))
+                    //print("weaponSelectedIndexNew: \(weaponSelectedIndexNew)")
+                    //selectWeaponOption(weaponSelectedIndexNew)
+                    
+                    
                     
                 } else if name == "saveButton" || name == "saveButtonLabel" {
                     //print("saveButton or saveButtonLabel")
                     
                     let transition = SKTransition.flipVerticalWithDuration(1.0)
-                    let game = GameLevel1Scene(size:frame.size)
+                    let game = GameLevel1Scene(size:frame.size, bodyFileName: bodyImageNames[bodySelectedIndex], armorFileName: armorImageNames[armorSelectedIndex], weaponFileName: "")
                     view!.presentScene(game, transition: transition)
-
                     
                 }
                 

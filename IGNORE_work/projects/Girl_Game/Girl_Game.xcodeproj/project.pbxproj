@@ -20,7 +20,7 @@
 		BBEDCB8D1CBEDFD000C2F456 /* MySKLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEDCB8C1CBEDFD000C2F456 /* MySKLabelNode.swift */; };
 		BBEDCB8F1CBEE18700C2F456 /* CreationOptionCharacterSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEDCB8E1CBEE18700C2F456 /* CreationOptionCharacterSprite.swift */; };
 		BBEDCB911CBEE1CF00C2F456 /* MySKShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEDCB901CBEE1CF00C2F456 /* MySKShapeNode.swift */; };
-		BBEDCB931CBFB66A00C2F456 /* CreateLevelSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEDCB921CBFB66A00C2F456 /* CreateLevelSpriteNode.swift */; };
+		BBEDCB931CBFB66A00C2F456 /* CreateLevelSpritePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBEDCB921CBFB66A00C2F456 /* CreateLevelSpritePlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +39,7 @@
 		BBEDCB8C1CBEDFD000C2F456 /* MySKLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySKLabelNode.swift; sourceTree = "<group>"; };
 		BBEDCB8E1CBEE18700C2F456 /* CreationOptionCharacterSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreationOptionCharacterSprite.swift; sourceTree = "<group>"; };
 		BBEDCB901CBEE1CF00C2F456 /* MySKShapeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySKShapeNode.swift; sourceTree = "<group>"; };
-		BBEDCB921CBFB66A00C2F456 /* CreateLevelSpriteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateLevelSpriteNode.swift; sourceTree = "<group>"; };
+		BBEDCB921CBFB66A00C2F456 /* CreateLevelSpritePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateLevelSpritePlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +102,7 @@
 				BBEDCB8C1CBEDFD000C2F456 /* MySKLabelNode.swift */,
 				BBEDCB8E1CBEE18700C2F456 /* CreationOptionCharacterSprite.swift */,
 				BBEDCB901CBEE1CF00C2F456 /* MySKShapeNode.swift */,
-				BBEDCB921CBFB66A00C2F456 /* CreateLevelSpriteNode.swift */,
+				BBEDCB921CBFB66A00C2F456 /* CreateLevelSpritePlayer.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -179,7 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0385301B1CB59E68003C0C9E /* GameLevel1Scene.swift in Sources */,
-				BBEDCB931CBFB66A00C2F456 /* CreateLevelSpriteNode.swift in Sources */,
+				BBEDCB931CBFB66A00C2F456 /* CreateLevelSpritePlayer.swift in Sources */,
 				0385301D1CB59E68003C0C9E /* GameViewController.swift in Sources */,
 				0385302F1CB5E7E5003C0C9E /* GameIntroScene.swift in Sources */,
 				0385302D1CB5E6CA003C0C9E /* GameCharacterCreationScene.swift in Sources */,

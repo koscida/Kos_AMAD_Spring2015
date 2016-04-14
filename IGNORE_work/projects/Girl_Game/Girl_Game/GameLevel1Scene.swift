@@ -18,13 +18,19 @@ class GameLevel1Scene: SKScene {
     let frameBorder: CGFloat = 20
     
     // player
-    var player = CreateLevelSpriteNode()
+    var player = CreateLevelSpritePlayer()
+    var movingPlayerUp = false;
+    var movingPlayerDown = false;
+    var playerBodyFile = ""
+    var playerArmorFile = ""
+    var playerWeaponFile = ""
     
     // background
     var backgroundCurrent1 = SKSpriteNode()
     var backgroundCurrent2 = SKSpriteNode()
     
     // screen options
+    
     
     
     override func didMoveToView(view: SKView) {
@@ -37,8 +43,36 @@ class GameLevel1Scene: SKScene {
         frameCenterHeight = frameHeight / 2
         
         
+        
         // setup screen
         //createSKShapeNodeRect
+        let arrowButtonWidth:CGFloat = 200;
+        let arrowButtonHeight:CGFloat = frameHeight / 2;
+        let arrowButtonX: CGFloat = 0
+        let arrowButtonDownY: CGFloat = 0
+        let arrowButtonUpY: CGFloat = arrowButtonDownY + arrowButtonHeight
+        
+        let upButton = createSKShapeNodeRect(name: "upButton", rect: CGRect(x: arrowButtonX, y: arrowButtonUpY, width: arrowButtonWidth, height: arrowButtonHeight), fillColor: greyMediumColor)
+        upButton.strokeColor = greyDarkColor
+        upButton.lineWidth = 10
+        upButton.zPosition = 10
+        self.addChild(upButton)
+        
+        let upButtonLabel = createSKLabelNodeAdj(name: "upButton", text: "Up", x: arrowButtonX + (arrowButtonWidth/2), y: arrowButtonUpY + (arrowButtonHeight/2), width: arrowButtonWidth, height: arrowButtonHeight, fontColor: UIColor.whiteColor())
+        upButtonLabel.zPosition = 11
+        self.addChild(upButtonLabel)
+        
+        
+        let downButton = createSKShapeNodeRect(name: "downButton", rect: CGRect(x: arrowButtonX, y: arrowButtonDownY, width: arrowButtonWidth, height: arrowButtonHeight), fillColor: greyMediumColor)
+        downButton.strokeColor = greyDarkColor
+        downButton.lineWidth = 10
+        downButton.zPosition = 10
+        self.addChild(downButton)
+        
+        let downButtonLabel = createSKLabelNodeAdj(name: "downButton", text: "Down", x: arrowButtonX + (arrowButtonWidth/2), y: arrowButtonDownY + (arrowButtonHeight/2), width: arrowButtonWidth, height: arrowButtonHeight, fontColor: UIColor.whiteColor())
+        downButtonLabel.zPosition = 11
+        self.addChild(downButtonLabel)
+        
         
         
         // setup background
@@ -60,8 +94,28 @@ class GameLevel1Scene: SKScene {
         // setup player
         let w = (frameHeight/5)
         let h = w * (2400/1328)
-        player = CreateLevelSpriteNode(name: "player", imageName: "sil_latina_archer", x: frameCenterWidth, y: frameCenterHeight, width: w, height: h, zPosition: 2)
+        print("playerBodyFile \(playerBodyFile)  --  playerArmorFile \(playerArmorFile)  --  playerWeaponFile \(playerWeaponFile)")
+        player = CreateLevelSpritePlayer(name: "player", bodyImageName: playerBodyFile, armorImageName: playerArmorFile, weaponImageName: playerWeaponFile, x: frameCenterWidth, y: frameCenterHeight, width: w, height: h, zPosition: 2)
+        
         self.addChild(player)
+    }
+    
+    convenience init(size: CGSize, bodyFileName: String, armorFileName: String, weaponFileName: String) {
+        self.init(size: size)
+        
+        playerBodyFile = bodyFileName
+        playerArmorFile = armorFileName
+        playerWeaponFile = weaponFileName
+        
+    }
+    
+    override init(size: CGSize) {
+        super.init(size: size)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     
@@ -82,9 +136,28 @@ class GameLevel1Scene: SKScene {
         
         for touch in touches {
             let location = touch.locationInNode(self)
+            let touchedNode = self.nodeAtPoint(location)
             
+            if let name = touchedNode.name
+            {
+                // switching between options
+                if name == "upButton" {
+                    //print("upButton")
+                    movingPlayerUp = true;
+                    
+                } else if name == "downButton" {
+                    //print("downButton")
+                    movingPlayerDown = true;
+
+                }
+            }
             
         }
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        movingPlayerUp = false;
+        movingPlayerDown = false;
     }
    
     override func update(currentTime: CFTimeInterval) {
@@ -99,6 +172,28 @@ class GameLevel1Scene: SKScene {
         }
         if (backgroundCurrent2.position.x <= (frameWidth/(-2))+19) {
             backgroundCurrent2.position.x = frameWidth + (frameWidth/2)
+        }
+        
+        // update player sprite
+        if(movingPlayerUp) {
+            movePlayerUp();
+        }
+        if(movingPlayerDown) {
+            movePlayerDown();
+        }
+    }
+    
+    
+    func movePlayerUp() {
+        if player.position.y <= (frameHeight - (player.bodySprite.size.height/2)) {
+            player.position.y += 10
+        }
+        
+    }
+    
+    func movePlayerDown() {
+        if player.position.y >= (0 + (player.bodySprite.size.height/2)) {
+            player.position.y -= 10
         }
     }
 }
