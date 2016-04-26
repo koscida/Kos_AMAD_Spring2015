@@ -10,6 +10,26 @@ import SpriteKit
 
 class GameLevel1Scene: SKScene {
     
+    // timers
+    var lastUpdateTimeInterval: CFTimeInterval = 0
+    var frameCount: Int = 0
+    
+    // game modes
+    var gamePause = true
+    var PAUSE_SCREEN_INSTRUCTIONS = 0
+    var PAUSE_SCREEN_DOLL = 10
+    var PAUSE_SCREEN_CAR = 11
+    var PAUSE_SCREEN_LIPSTICK = 12
+    var PAUSE_SCREEN_OVENMIT = 13
+    var PAUSE_SCREEN_TEAPOT = 14
+    var PAUSE_SCREEN_SWORD = 20
+    var PAUSE_SCREEN_TRUCK = 21
+    var PAUSE_SCREEN_TOOLS = 22
+    var PAUSE_SCREEN_MOTORCYCLE = 23
+    var PAUSE_SCREEN_PLANE = 24
+    var pauseScreenNum = 0
+    var pauseScreenFrame = SKSpriteNode()
+    
     // frame things
     var frameWidth: CGFloat = 0;
     var frameHeight: CGFloat = 0;
@@ -98,6 +118,11 @@ class GameLevel1Scene: SKScene {
         player = CreateLevelSpritePlayer(name: "player", bodyImageName: playerBodyFile, armorImageName: playerArmorFile, weaponImageName: playerWeaponFile, x: frameCenterWidth, y: frameCenterHeight, width: w, height: h, zPosition: 2)
         
         self.addChild(player)
+        
+        
+        // setup pause screen
+        pauseScreenFrame.zPosition = 1000
+        displayPauseScreen()
     }
     
     convenience init(size: CGSize, bodyFileName: String, armorFileName: String, weaponFileName: String) {
@@ -123,7 +148,26 @@ class GameLevel1Scene: SKScene {
     ///////////////////////////////////////
     //          Scene loaders            //
     ///////////////////////////////////////
-    
+    func displayPauseScreen() {
+        let overlay = createSKShapeNodeRect(name: "pauseOverlay", rect: CGRect(x: 0, y: 0, width: frameWidth, height: frameWidth), fillColor: UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 0.7))
+        pauseScreenFrame.addChild(overlay)
+        
+        switch(pauseScreenNum) {
+        case PAUSE_SCREEN_INSTRUCTIONS:
+            let introText1 = createSKLabelNodeAdj(name: "introText", text: "Level 1: Early Childhood", x: frameCenterWidth, y: frameCenterHeight+300, width: frameWidth, height: frameHeight, fontColor: UIColor.whiteColor())
+            pauseScreenFrame.addChild(introText1)
+            
+            let introText2 = createSKLabelNodeAdj(name: "introText", text: "Collect toys to gain SPICE points", x: frameCenterWidth, y: frameCenterHeight, width: frameWidth/1.5, height: frameHeight, fontColor: UIColor.whiteColor())
+            pauseScreenFrame.addChild(introText2)
+            
+            let introText3 = createSKLabelNodeAdj(name: "introText", text: "Let's play!", x: frameCenterWidth, y: frameCenterHeight-300, width: frameWidth/3, height: frameHeight, fontColor: UIColor.whiteColor())
+            pauseScreenFrame.addChild(introText3)
+            
+        default: break;
+        }
+        
+        self.addChild(pauseScreenFrame)
+    }
     
     
     
@@ -163,17 +207,50 @@ class GameLevel1Scene: SKScene {
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
         
-        // update bacground
-        backgroundCurrent1.position.x -= 20
-        backgroundCurrent2.position.x -= 20
+        if(!gamePause) {
+            
+            //////////////////////////////
+            //          Timers          //
+            //////////////////////////////
+            frameCount++
+            //print(frameCount)
+            
+            //print(currentTime)
+            
+            var delta: CFTimeInterval = currentTime - lastUpdateTimeInterval
+            //print(delta)
+            
+            lastUpdateTimeInterval = currentTime
+            
+            /*
+            if delta > 1.0 {
+                delta = minTimeInterval
+            }
+            
+            updateWithTimeSinceLastUpdate(delta)
+            */
         
-        if(backgroundCurrent1.position.x <= (frameWidth/(-2))+19) {
-            backgroundCurrent1.position.x = frameWidth + (frameWidth/2)
-        }
-        if (backgroundCurrent2.position.x <= (frameWidth/(-2))+19) {
-            backgroundCurrent2.position.x = frameWidth + (frameWidth/2)
+        
+        
+            //////////////////////////////////
+            //          Background          //
+            //////////////////////////////////
+            // update background
+            backgroundCurrent1.position.x -= 20
+            backgroundCurrent2.position.x -= 20
+            
+            if(backgroundCurrent1.position.x <= (frameWidth/(-2))+19) {
+                backgroundCurrent1.position.x = frameWidth + (frameWidth/2)
+            }
+            if (backgroundCurrent2.position.x <= (frameWidth/(-2))+19) {
+                backgroundCurrent2.position.x = frameWidth + (frameWidth/2)
+            }
         }
         
+        
+        ///////////////////////////////
+        //          Buttons          //
+        ///////////////////////////////
         // update player sprite
         if(movingPlayerUp) {
             movePlayerUp();

@@ -95,8 +95,8 @@ class GameViewController: UIViewController {
         
         // get scene file
         //let scene = GameIntroScene(size: view.frame.size)
-        let scene = GameCharacterCreationScene(size: view.frame.size)
-        //let scene = GameLevel1Scene(size: view.frame.size, bodyFileName: "sil_latina", armorFileName: "sil_armor_warrior_trans", weaponFileName: "")
+        //let scene = GameCharacterCreationScene(size: view.frame.size)
+        let scene = GameLevel1Scene(size: view.frame.size, bodyFileName: "sil_latina", armorFileName: "sil_armor_warrior_trans", weaponFileName: "")
         
         // get scaling factor
         let scale:CGFloat = UIScreen.mainScreen().scale;
