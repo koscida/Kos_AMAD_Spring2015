@@ -10,16 +10,32 @@ import Foundation
 import UIKit
 import SpriteKit
 
-class CreateLevelSpritePlayer: SKNode {
+class PlayerSprite: SKNode {
     
-    var bodySprite = SKSpriteNode()
-    var armorSprite = SKSpriteNode()
-    var weaponSprite = SKSpriteNode()
+    private var bodySprite = SKSpriteNode()
+    private var armorSprite = SKSpriteNode()
+    private var weaponSprite = SKSpriteNode()
+    private var size = CGSize()
+    private var max: CGFloat = 0
     
-    convenience init(name: String, bodyImageName: String, armorImageName: String, weaponImageName: String, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, zPosition: CGFloat) {
+    private var moveSpeed:CGFloat = 10
+    
+    var topPosition: CGFloat = 0
+    var bottomPosition: CGFloat = 0
+    var leftPosition: CGFloat = 0
+    var rightPosition: CGFloat = 0
+    
+    convenience init(name: String, bodyImageName: String, armorImageName: String, weaponImageName: String, x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, zPosition: CGFloat, maxHeight: CGFloat) {
         self.init()
-        let size = CGSize(width: width, height: height)
+        size = CGSize(width: width, height: height)
         let position = CGPoint(x: x, y: y)
+        
+        topPosition = y + (height/2)
+        bottomPosition = y - (height/2)
+        leftPosition = x - (width/2)
+        rightPosition = x + (width/2)
+        
+        max = maxHeight
         
         let bodyTexture = SKTexture(imageNamed: bodyImageName)
         let armorTexture = SKTexture(imageNamed: armorImageName)
@@ -61,7 +77,22 @@ class CreateLevelSpritePlayer: SKNode {
     
     
     
+    func movePlayerUp() {
+        if super.position.y <= (max - (size.height/2)) {
+            super.position.y += moveSpeed
+            topPosition += moveSpeed
+            bottomPosition += moveSpeed
+        }
+        
+    }
     
+    func movePlayerDown() {
+        if super.position.y >= (0 + (size.height/2)) {
+            super.position.y -= moveSpeed
+            topPosition -= moveSpeed
+            bottomPosition -= moveSpeed
+        }
+    }
     
     
 }
