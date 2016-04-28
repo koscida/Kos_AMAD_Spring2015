@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Kos Final Exam</string>
+
+
+    <string-array name="workoutTypeArray">
+        <item>Cardio</item>
+        <item>Strength</item>
+        <item>Flexibility</item>
+    </string-array>
+
+    <string name="create_order">Order</string>
+
+
+</resources>
