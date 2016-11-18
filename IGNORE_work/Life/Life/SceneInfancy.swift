@@ -37,7 +37,7 @@ class SceneInfancy: SceneBase {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
         
-        print("---------- TOUCHES BEGAN (" + sceneNameInfancy + ") ----------")
+        //print("---------- TOUCHES BEGAN (" + sceneNameInfancy + ") ----------")
         
         for touch in touches {
             let location = touch.locationInNode(self)
@@ -143,7 +143,7 @@ class SceneInfancy: SceneBase {
         print("runAction_SelectedItem")
         itemSelected = item
         createContent_ItemDeatilPopup(item)
-        sceneState++
+        sceneState += 1
     }
     
     func runAction_ExitPopup() {
@@ -166,7 +166,7 @@ class SceneInfancy: SceneBase {
         // check number of min buys TODO
         
         // add to item own count TODO persisted
-        itemSelected.owns++
+        itemSelected.owns += 1
         
         // add to inventory TODO persisted
         inventoryItems.append(itemSelected)

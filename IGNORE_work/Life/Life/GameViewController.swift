@@ -20,13 +20,13 @@ class GameViewController: UIViewController {
         // persists throughout the app, no matter the scene
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "applicationWillResignActive:",
+            selector: #selector(UIApplicationDelegate.applicationWillResignActive(_:)),
             name: UIApplicationWillResignActiveNotification,
             object: UIApplication.sharedApplication())
         
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "applicationDidBecomeActive:",
+            selector: #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)),
             name: UIApplicationDidBecomeActiveNotification,
             object: UIApplication.sharedApplication())
         

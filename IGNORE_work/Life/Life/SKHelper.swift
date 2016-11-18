@@ -92,6 +92,7 @@ let nameAnimationsNode = "AnimationsNode"
 let nameMenuOverlayNode = "MenuOverlayNode"
 let namePopupNode = "PopupNode"
 let nameInventoryNode = "InventoryNode"
+let nameInventoryPopupNode = "InventoryPopupNode"
 
 
 let zPositionContent: CGFloat = 1
@@ -99,22 +100,25 @@ let zPositionAnimations: CGFloat = 10
 let zPositionMenuOverlay: CGFloat = 20
 let zPositionPopup: CGFloat = 30
 let zPositionInventory: CGFloat = 40
+let zPositionInventoryPopup: CGFloat = 50
 
 
 let popupWidthFraction: CGFloat = 0.8
 let popupHeightFraction: CGFloat = 0.8
 let popupWidth: CGFloat = popupWidthFraction * SceneBase.frameWidth
 let popupHeight: CGFloat = popupHeightFraction * SceneBase.frameHeight
-let popupX: CGFloat = SceneBase.frameCenterWidth - (popupWidth / 2)
-let popupY: CGFloat = SceneBase.frameCenterHeight - (popupHeight / 2)
+let popupLeftX: CGFloat = SceneBase.frameCenterWidth - (popupWidth / 2)
+let popupRightX = popupLeftX + popupWidth
+let popupBottomY: CGFloat = SceneBase.frameCenterHeight - (popupHeight / 2)
+let popupTopY = popupButtonY + popupHeight
 
 let popupPadding: CGFloat = 20
 
 let popupButtonWidth: CGFloat = 300
 let popupButtonHeight: CGFloat = 150
-let popupButtonLeftX: CGFloat = popupX + popupPadding
-let popupButonRightX: CGFloat = popupX + popupWidth - popupPadding - popupButtonWidth
-let popupButtonY: CGFloat = popupY + popupPadding
+let popupButtonLeftX: CGFloat = popupLeftX + popupPadding
+let popupButtonRightX: CGFloat = popupLeftX + popupWidth - popupPadding - popupButtonWidth
+let popupButtonY: CGFloat = popupBottomY + popupPadding
 
 let popupButtonCancel = "cancelBtn"
 let popupButtonConfirm = "confirmBtn"
@@ -132,12 +136,14 @@ let menuInventoryButtonY: CGFloat = 0 + menuPadding
 let menuInventoryButtonName = "inventoryBtn"
 
 
+let exitButtonWidth: CGFloat = 100
+let exitButtonHeight: CGFloat = 100
+
 let inventoryPadding: CGFloat = 40
 
-let inventoryBackButtonName = "inventoryBackBtn"
-let inventoryBackButtonWidth: CGFloat = 100
-let inventoryBackButtonHeight: CGFloat = 100
-let inventoryHeaderMenuHeight = inventoryPadding + inventoryBackButtonHeight + inventoryPadding
+let inventoryExitButtonName = "inventoryExitBtn"
+
+let inventoryHeaderMenuHeight = inventoryPadding + exitButtonHeight + inventoryPadding
 
 let inventoryTabHeight: CGFloat = 100
 let inventoryTabWidth: CGFloat = 300
@@ -154,6 +160,9 @@ let inventoryCardHeight = inventoryDisplayContainerHeight * 0.9
 let inventoryCardWidth = inventoryCardHeight * 0.6
 let inventoryCardTop = inventoryDisplayContainerHeight * 0.95
 let inventoryCardY = inventoryCardTop - inventoryCardHeight
+
+let inventoryCardName = "ItemCard"
+let inventoryPopupExitButtonName = "inventoryPopupExitBtn"
 
 
 
@@ -335,7 +344,7 @@ func createMuteOverlay() -> SKShapeNode {
 }
 
 func createPopupBack() -> SKShapeNode {
-    return createRect(name: "popupDisplayBack", widthExact: popupWidth, heightExact: popupHeight, xExact: popupX, yExact: popupY, fillColor: colorPopupBack)
+    return createRect(name: "popupDisplayBack", widthExact: popupWidth, heightExact: popupHeight, xExact: popupLeftX, yExact: popupBottomY, fillColor: colorPopupBack)
 }
 
 // (centered)
@@ -345,11 +354,16 @@ func createPopupGoButton(name name: String, text: String, x: CGFloat, y: CGFloat
 }
 
 func createPopupSmallButton(name name: String, text: String, bright: Bool, onRight: Bool) -> SKNode {
-    let buttonX = (onRight) ? popupButonRightX : popupButtonLeftX
+    let buttonX = (onRight) ? popupButtonRightX : popupButtonLeftX
     let buttonBackColor = (bright) ? colorPopupSmallButtonBackBright : colorPopupSmallButtonBackMuted
     let buttonTextColor = (bright) ? colorPopupSmallButtonTextBright : colorPopupSmallButtonTextMuted
     
     return createSimpleButton(name: name, text: text, x: buttonX, y: popupButtonY, widthExact: popupButtonWidth, heightExact: popupButtonHeight, textColor: buttonTextColor, fillColor: buttonBackColor)
+}
+
+// (centered)
+func createPopupExitButton(name name: String, x: CGFloat, y: CGFloat) -> SKNode {
+    return createSimpleButton(name: name, text: "X", x: x, y: y, widthExact: exitButtonWidth, heightExact: exitButtonHeight, textColor: colorInventoryBackButtonText, fillColor: colorInventoryBackButtonFill)
 }
 
 
@@ -365,23 +379,41 @@ func createPopupSmallButton(name name: String, text: String, bright: Bool, onRig
 //// ///////////////////////////////////////////////////////////////// ////
 //// ///////////////////////////////////////////////////////////////// ////
 
-func createInventoryBack() -> SKShapeNode {
-    return createRect(name: "inventoryMenuBack", widthExact: SceneBase.frameWidth, heightExact: SceneBase.frameHeight, xExact: 0, yExact: 0, fillColor: colorGreyLight)
-}
+var inventoryDisplayContainerWidthRunning:CGFloat = 0
 
-
-
-func createInventoryHeaderMenu() -> SKNode {
+func createInventoryMenu() -> SKNode {
+    
+    // create a wrapper
+    let inv = SKNode()
+    inv.name = "inventoryWrapper"
+    
+    var runningX: CGFloat = 0
+    
+    
+    
+    
+    //////////////////////////////
+    //      inventory back      //
+    //////////////////////////////
+    inv.addChild(
+        createRect(name: "inventoryBack", widthExact: SceneBase.frameWidth, heightExact: SceneBase.frameHeight, xExact: 0, yExact: 0, fillColor: colorGreyLight)
+    )
+    
+    
+    
+    
+    //////////////////////////
+    //      header menu     //
+    //////////////////////////
     let invHeaderMenu = SKNode();
-    invHeaderMenu.name = "invHeaderMenu"
+    invHeaderMenu.name = "inventoryMenuHeader"
     
-    var runningX = inventoryPadding
-    
-    // back button
-    let backBtn = createSimpleButton(name: inventoryBackButtonName, text: "X", x: runningX, y: (SceneBase.frameHeight - inventoryBackButtonHeight - inventoryPadding), widthExact: inventoryBackButtonWidth, heightExact: inventoryBackButtonHeight, textColor: colorInventoryBackButtonText, fillColor: colorInventoryBackButtonFill)
+    // exit button
+    let backBtn = createSimpleButton(name: inventoryExitButtonName, text: "X", x: SceneBase.frameWidth - inventoryPadding - exitButtonWidth, y: (SceneBase.frameHeight - exitButtonHeight - inventoryPadding), widthExact: exitButtonWidth, heightExact: exitButtonHeight, textColor: colorInventoryBackButtonText, fillColor: colorInventoryBackButtonFill)
     invHeaderMenu.addChild(backBtn)
     
-    runningX += inventoryBackButtonWidth + inventoryPadding
+    
+    runningX = inventoryPadding
     
     // title
     let title = createLabelTitleLeftJustified(name: "inventoryTitle", text: "Inventory", x: runningX, y: (SceneBase.frameHeight-inventoryPadding), textColor: colorInventoryTitle )
@@ -389,61 +421,60 @@ func createInventoryHeaderMenu() -> SKNode {
     
     // coins TODO
     
-    
     // stats TODO
     
     // done
-    return invHeaderMenu
-}
-
-func createInventoryTabsMenu() -> SKNode {
+    inv.addChild(invHeaderMenu)
+    
+    
+    
+    
+    ////////////////////////
+    //      tabs menu     //
+    ////////////////////////
     let invTabsMenu = SKNode();
     invTabsMenu.name = "invTabsMenu"
     
-    let runningX = inventoryPadding
-    
+    runningX = inventoryPadding
     
     // TODO remove this and implement multiple tabs, this is code for one single tab
     let btn = createSimpleButton(name: inventoryTabNameAll, text: "All", x: runningX, y: inventoryTabMenuY, widthExact: inventoryTabWidth, heightExact: inventoryTabHeight, textColor: colorInventoryTabText, fillColor: colorInventoryTabBack)
     invTabsMenu.addChild(btn)
     
-    
-    
     // TODO add tabs, removed for easy
     /*
-    // traits
-    for trait in femTraits + [inventoryTabMasName] {
-        // create label
-        let label = createLabelTextCentered(name: trait+inventoryTabNameSuffix, text: trait, x: runningX + (inventoryTabWidth/2), y: inventoryTabMenuY + (inventoryTabHeight/2), textColor: colorInventoryTabText)
-        
-        // create back
-        let back = createRect(name: trait+"TabBtn", widthExact: inventoryTabWidth, heightExact: inventoryTabHeight, xExact: runningX, yExact: inventoryTabMenuY, fillColor: colorInventoryTabBack)
-        
-        // create button
-        let btn = createBaseButton(skNodeShape: back, skNodeLabel: label)
-        
-        // add to tab menu
-        invTabsMenu.addChild(btn)
-        
-        // incrament runningX
-        runningX += inventoryPadding + inventoryTabWidth
-    }
-    */
-    
-    
+     // traits
+     for trait in femTraits + [inventoryTabMasName] {
+     // create label
+     let label = createLabelTextCentered(name: trait+inventoryTabNameSuffix, text: trait, x: runningX + (inventoryTabWidth/2), y: inventoryTabMenuY + (inventoryTabHeight/2), textColor: colorInventoryTabText)
+     
+     // create back
+     let back = createRect(name: trait+"TabBtn", widthExact: inventoryTabWidth, heightExact: inventoryTabHeight, xExact: runningX, yExact: inventoryTabMenuY, fillColor: colorInventoryTabBack)
+     
+     // create button
+     let btn = createBaseButton(skNodeShape: back, skNodeLabel: label)
+     
+     // add to tab menu
+     invTabsMenu.addChild(btn)
+     
+     // incrament runningX
+     runningX += inventoryPadding + inventoryTabWidth
+     }
+     */
     
     // done
-    return invTabsMenu
-}
-
-var inventoryDisplayContainerWidthRunning:CGFloat = 0
-
-func createIntentoryDisplay() -> SKNode {
+    inv.addChild(invTabsMenu)
+    
+    
+    
+    
+    ////////////////////////////////
+    //      scrolling display     //
+    ////////////////////////////////
     let invDisplay = SKNode();
     invDisplay.name = "invDisplay"
     
-    var runningX = inventoryPadding
-    
+    runningX = inventoryPadding
     
     let invDisplayContainer = createRect(name: "invDisplayContainer", widthExact: inventoryDisplayContainerWidth, heightExact: inventoryDisplayContainerHeight, xExact: 0, yExact: 0, fillColor: colorInventoryDisplayContainerBack)
     invDisplay.addChild(invDisplayContainer)
@@ -457,10 +488,10 @@ func createIntentoryDisplay() -> SKNode {
         //print(item)
         // item card
         let itemCard = SKNode()
-        let n = item.name+"ItemCard"
+        let n = item.name + inventoryCardName
         itemCard.name = n
         
-        // item back 
+        // item back
         let itemBack = createRect(name: n, widthExact: inventoryCardWidth, heightExact: inventoryCardHeight, xExact: runningX, yExact: inventoryCardY, fillColor: colorInventoryCardBack)
         itemCard.addChild(itemBack)
         
@@ -482,10 +513,35 @@ func createIntentoryDisplay() -> SKNode {
     }
     inventoryDisplayContainerWidthRunning = runningX + inventoryCardWidth + inventoryPadding
     
-    
     // done
-    return invDisplay
+    inv.addChild(invDisplay)
+    
+    
+    
+    
+    ///////////////////
+    //      done     //
+    ///////////////////
+    return inv
+    
 }
+
+func createInventoryItemDetail() -> SKNode {
+    let popup = SKNode()
+    
+    let mute = createMuteOverlay()
+    popup.addChild(mute)
+    
+    let dialogue = createPopupBack()
+    popup.addChild(dialogue)
+    
+    let exitBtn = createPopupExitButton(name: inventoryPopupExitButtonName, x: popupRightX - popupPadding - exitButtonWidth, y: popupTopY - (popupPadding*2) - exitButtonHeight)
+    popup.addChild(exitBtn)
+    
+    return popup
+}
+
+
 
 
 

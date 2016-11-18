@@ -40,6 +40,7 @@ class SceneBase: SKScene {
     var menuOverlayNode = SKNode()
     var popupOverlayNode = SKNode()
     var inventoryNode = SKNode()
+    var inventoryPopupNode = SKNode()
     
     var sceneState = 0
     var itemSelected = Item()
@@ -59,6 +60,7 @@ class SceneBase: SKScene {
         menuOverlayNode.zPosition = zPositionMenuOverlay
         popupOverlayNode.zPosition = zPositionPopup
         inventoryNode.zPosition = zPositionInventory
+        inventoryPopupNode.zPosition = zPositionInventoryPopup
         
         // name each of the nodes
         contentNode.name = nameContentNode
@@ -66,6 +68,7 @@ class SceneBase: SKScene {
         menuOverlayNode.name = nameMenuOverlayNode
         popupOverlayNode.name = namePopupNode
         inventoryNode.name = nameInventoryNode
+        inventoryPopupNode.name = nameInventoryPopupNode
         
     }
     
@@ -75,7 +78,7 @@ class SceneBase: SKScene {
     //          Touches            //
     /////////////////////////////////
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("---------- TOUCHES BEGAN (" + sceneNameBase + ") ----------")
+        //print("---------- TOUCHES BEGAN (" + sceneNameBase + ") ----------")
         
         for touch in touches {
             let location = touch.locationInNode(self)
@@ -97,10 +100,22 @@ class SceneBase: SKScene {
                 ////////////////////////////
                 //  inventory buttons     //
                 ////////////////////////////
-                // back button
-                if name == inventoryBackButtonName {
+                // exit inventory button
+                if name == inventoryExitButtonName {
                     runAction_ExitInventoryMenu()
                 }
+                // inventory item selected
+                for item in inventoryItems {
+                    if name == item.name + inventoryCardName {
+                        runAction_SelectInventoryItem(item: item)
+                        print(name + " in item card")
+                    }
+                }
+                // exit inventory item detail
+                if name == inventoryPopupExitButtonName {
+                    runAction_ExitInventoryPopup()
+                }
+                
                 // TODO add tab logic when changing from one single tab to multiple tabs
             }
         }
@@ -136,28 +151,14 @@ class SceneBase: SKScene {
         if !hasCreatedInventoryMenu || true {
             //print("creating inventory menu")
             
-            // create back
-            let invBack = createInventoryBack()
-            inventoryNode.addChild(invBack)
             
-            // header menu
-            let invHeaderMenu = createInventoryHeaderMenu()
-            inventoryNode.addChild(invHeaderMenu)
-            
-            // tabs menu
-            let invTabsMenu = createInventoryTabsMenu()
-            inventoryNode.addChild(invTabsMenu)
-            
-            
-            
-            // inventory display
-            let invDisplayMovable = createIntentoryDisplay()
-            inventoryNode.addChild(invDisplayMovable)
+            let inv = createInventoryMenu()
+            inventoryNode.addChild(inv)
             
             
             // code for movable scrolling view
             //let invDisplayMovable = SKNode() // replacing with: invDisplayMovable
-            
+            /*
             let scrollView = CustomScrollView(
                 frame: CGRect(x: 0, y: 0, width: inventoryDisplayContainerWidth, height:inventoryDisplayContainerHeight),
                 scene: self,
@@ -167,6 +168,7 @@ class SceneBase: SKScene {
             scrollView.contentSize = CGSizeMake(inventoryDisplayContainerWidthRunning, inventoryDisplayContainerHeight)
             
             view?.addSubview(scrollView)
+             */
             
             //addChild(invDisplayMovable) // replacing with: inventoryNode.addChild(invDisplayMovable)
             
@@ -200,11 +202,36 @@ class SceneBase: SKScene {
     func runAction_ExitInventoryMenu() {
         print("runAction_ExitInventoryMenu")
         
-        // add main content
+        // add main content back to screen
         self.addChild(contentNode)
         
-        // remove inventory menu
+        // remove inventory menu from screen
         inventoryNode.removeFromParent()
+    }
+    
+    func runAction_SelectInventoryItem(item item: Item) {
+        print("runAction_SelectInventoryItem")
+        
+        // change state to inventory item selected
+        
+        // create inventory item detail popup
+        let invDetail = createInventoryItemDetail()
+        
+        // add to creater inventory popup
+        inventoryPopupNode.addChild(invDetail)
+        
+        // add to screen
+        self.addChild(inventoryPopupNode)
+    }
+    
+    func runAction_ExitInventoryPopup() {
+        print("runAction_ExitInventoryPopup")
+        
+        // delete inventory popup's content
+        inventoryPopupNode.removeAllChildren()
+        
+        // remove inventory popup from screen
+        inventoryPopupNode.removeFromParent()
     }
     
     
@@ -281,7 +308,7 @@ class SceneBase: SKScene {
         if(error) {
             SceneBase.state = 0
         } else {
-            SceneBase.state++;
+            SceneBase.state += 1;
         }
         
     }
