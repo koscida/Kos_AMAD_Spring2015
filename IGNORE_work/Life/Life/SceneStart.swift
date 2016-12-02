@@ -16,11 +16,9 @@ class SceneStart: SceneBase {
 
     override func didMoveToView(view: SKView) {
         
-        
         print("SceneStart - state 0")
         
-        createContent()
-        
+        createContent_Main()
         
         // add menu overlay
         //addMenuOverlay(self)
@@ -42,7 +40,7 @@ class SceneStart: SceneBase {
                 if name == "playButton"
                 {
                     //print("Touched")
-                    stateChangeNext()
+                    //stateChangeNext()
                 }
             }
         }
@@ -52,24 +50,20 @@ class SceneStart: SceneBase {
         /* Called before each frame is rendered */
     }
     
-    
-    
-    func createContent() {
+    override func createContent_Main() {
         
-        let titleLabel1 = createLabelTitleCentered(name: "", text: "This is a game", x: SceneBase.frameCenterWidth, y: SceneBase.frameCenterHeight + 300, textColor: colorStartText)
+        let titleLabel1 = createLabelTitleCentered(name: "", text: "This is a game", x: widthMid, y: heightMid + 300, textColor: colorStartText)
         self.addChild(titleLabel1)
         
-        let titleLabel2 = createLabelTitleCentered(name: "", text: "about the game of life", x: SceneBase.frameCenterWidth, y: SceneBase.frameCenterHeight + 100, textColor: colorStartText)
+        let titleLabel2 = createLabelTitleCentered(name: "", text: "about the game of life", x: widthMid, y: heightMid + 100, textColor: colorStartText)
         self.addChild(titleLabel2)
         
-        let titleLabel3 = createLabelTitleCentered(name: "", text: "for women", x: SceneBase.frameCenterWidth, y: SceneBase.frameCenterHeight - 100, textColor: colorStartText)
+        let titleLabel3 = createLabelTitleCentered(name: "", text: "for women", x: widthMid, y: heightMid - 100, textColor: colorStartText)
         self.addChild(titleLabel3)
         
-        let playButton = createPopupGoButton(name: "playButton", text: "PLAY", x: SceneBase.frameCenterWidth, y: SceneBase.frameCenterHeight - 300)
+        let playButton = createPopupButtonGo(name: "playButton", text: "PLAY", x: widthMid, y: heightMid - 300)
         self.addChild(playButton)
-        
     }
     
-    
-
 }
+

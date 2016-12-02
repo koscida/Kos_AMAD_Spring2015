@@ -12,164 +12,6 @@ import SpriteKit
 
 
 
-//// //////////////////////////////////////////// ////
-//// //////////////////////////////////////////// ////
-////                                              ////
-////              Helper Data - COLOR             ////
-////                                              ////
-//// //////////////////////////////////////////// ////
-//// //////////////////////////////////////////// ////
-
-// https://color.adobe.com/Flat-rainbow-color-theme-3012612/edit/?copy=true&base=2&rule=Custom&selected=0&name=Copy%20of%20Flat%20rainbow&mode=rgb&rgbvalues=0.945098,0.352941,0.352941,0.941176,0.768627,0.0980392,0.305882,0.729412,0.435294,0.176471,0.584314,0.74902,0.584314,0.356863,0.647059&swatchOrder=0,1,2,3,4
-let colorPink = UIColor(red: 241/255, green: 90/255, blue: 90/255, alpha: 1.0)
-let colorYellow = UIColor(red: 240/255, green: 196/255, blue: 25/255, alpha: 1.0)
-let colorGreen = UIColor(red: 78/255, green: 186/255, blue: 111/255, alpha: 1.0)
-let colorBlue = UIColor(red: 45/255, green: 149/255, blue: 191/255, alpha: 1.0)
-let colorPurple = UIColor(red: 149/255, green: 91/255, blue: 165/255, alpha: 1.0)
-
-let colorGreyLight = UIColor(red: 225/255, green: 215/255, blue: 215/255, alpha: 1.0)
-let colorGreyMedium = UIColor(red: 175/255, green: 165/255, blue: 165/255, alpha: 1.0)
-let colorGreyDarkRed: CGFloat = 125/255, colorGreyDarkGreen: CGFloat = 115/255, colorGreyDarkBlue: CGFloat = 115/255
-let colorGreyDark = UIColor(red: colorGreyDarkRed, green: colorGreyDarkGreen, blue: colorGreyDarkBlue, alpha: 1.0)
-
-
-let colorPopupMute = UIColor(red: (colorGreyDarkRed), green: (colorGreyDarkGreen), blue: (colorGreyDarkBlue), alpha: 0.6)
-let colorPopupBack = colorGreyLight
-let colorPopupGoButtonText = UIColor.whiteColor()
-
-let colorPopupSmallButtonBackBright = colorPink
-let colorPopupSmallButtonTextBright = UIColor.whiteColor()
-let colorPopupSmallButtonBackMuted = colorGreyMedium
-let colorPopupSmallButtonTextMuted = UIColor.blackColor()
-
-let colorPopupGoButtonBack = colorPink
-
-
-let colorInventoryBackButtonFill = colorGreyMedium
-let colorInventoryBackButtonText = UIColor.blackColor()
-
-let colorInventoryBackButton = colorGreyMedium
-let colorInventoryTitle = UIColor.blackColor()
-
-let colorInventoryTabBack = colorGreyMedium
-let colorInventoryTabText = UIColor.blackColor()
-
-let colorInventoryDisplayContainerBack = colorGreyMedium
-let colorInventoryCardBack = colorGreyDark
-let colorInventoryCardTitle = UIColor.blackColor()
-
-
-let colorStartText = UIColor.whiteColor()
-
-
-
-
-
-
-
-
-//// ///////////////////////////////////////////// ////
-//// ///////////////////////////////////////////// ////
-////                                               ////
-////              Helper Data - VALUES             ////
-////                                               ////
-//// ///////////////////////////////////////////// ////
-//// ///////////////////////////////////////////// ////
-
-let sceneNameBase = "SceneBase"
-let sceneNameStart = "SceneStart"
-let sceneNameInfancy = "SceneInfancy"
-let sceneNameChildhood = "SceneChildhood"
-let sceneNameAdolescence = "SceneAdolescence"
-let sceneNameTeens = "SceneTeens"
-let sceneNameCollege = "SceneCollege"
-let sceneNameAdulthood = "SceneAdulthood"
-let sceneNameEnd = "SceneEnd"
-let sceneNames = [sceneNameStart, sceneNameInfancy, sceneNameChildhood, sceneNameAdolescence, sceneNameTeens, sceneNameCollege, sceneNameAdulthood, sceneNameEnd]
-
-let nameContentNode = "ContentNode"
-let nameAnimationsNode = "AnimationsNode"
-let nameMenuOverlayNode = "MenuOverlayNode"
-let namePopupNode = "PopupNode"
-let nameInventoryNode = "InventoryNode"
-let nameInventoryPopupNode = "InventoryPopupNode"
-
-
-let zPositionContent: CGFloat = 1
-let zPositionAnimations: CGFloat = 10
-let zPositionMenuOverlay: CGFloat = 20
-let zPositionPopup: CGFloat = 30
-let zPositionInventory: CGFloat = 40
-let zPositionInventoryPopup: CGFloat = 50
-
-
-let popupWidthFraction: CGFloat = 0.8
-let popupHeightFraction: CGFloat = 0.8
-let popupWidth: CGFloat = popupWidthFraction * SceneBase.frameWidth
-let popupHeight: CGFloat = popupHeightFraction * SceneBase.frameHeight
-let popupLeftX: CGFloat = SceneBase.frameCenterWidth - (popupWidth / 2)
-let popupRightX = popupLeftX + popupWidth
-let popupBottomY: CGFloat = SceneBase.frameCenterHeight - (popupHeight / 2)
-let popupTopY = popupButtonY + popupHeight
-
-let popupPadding: CGFloat = 20
-
-let popupButtonWidth: CGFloat = 300
-let popupButtonHeight: CGFloat = 150
-let popupButtonLeftX: CGFloat = popupLeftX + popupPadding
-let popupButtonRightX: CGFloat = popupLeftX + popupWidth - popupPadding - popupButtonWidth
-let popupButtonY: CGFloat = popupBottomY + popupPadding
-
-let popupButtonCancel = "cancelBtn"
-let popupButtonConfirm = "confirmBtn"
-
-let popupGoButtonWidth: CGFloat = 500
-let popupGoButtonHeight: CGFloat = 200
-
-
-let menuPadding: CGFloat = 20
-
-let menuInventoryButtonWidth: CGFloat = 200
-let menuInventoryButtonHeight: CGFloat = 200
-let menuInventoryButtonX: CGFloat = SceneBase.frameWidth - menuInventoryButtonWidth - menuPadding
-let menuInventoryButtonY: CGFloat = 0 + menuPadding
-let menuInventoryButtonName = "inventoryBtn"
-
-
-let exitButtonWidth: CGFloat = 100
-let exitButtonHeight: CGFloat = 100
-
-let inventoryPadding: CGFloat = 40
-
-let inventoryExitButtonName = "inventoryExitBtn"
-
-let inventoryHeaderMenuHeight = inventoryPadding + exitButtonHeight + inventoryPadding
-
-let inventoryTabHeight: CGFloat = 100
-let inventoryTabWidth: CGFloat = 300
-let inventoryTabMenuHeight = inventoryPadding + inventoryTabHeight
-let inventoryTabMenuY = SceneBase.frameHeight - inventoryHeaderMenuHeight - inventoryTabMenuHeight
-let inventoryTabNameSuffix = "TabBtn"
-let inventoryTabMasName = "Other"
-let inventoryTabNameAll = "tabAllBtn"
-
-let inventoryDisplayContainerWidth = SceneBase.frameWidth
-let inventoryDisplayContainerHeight = SceneBase.frameHeight - (inventoryHeaderMenuHeight + inventoryTabMenuHeight)
-
-let inventoryCardHeight = inventoryDisplayContainerHeight * 0.9
-let inventoryCardWidth = inventoryCardHeight * 0.6
-let inventoryCardTop = inventoryDisplayContainerHeight * 0.95
-let inventoryCardY = inventoryCardTop - inventoryCardHeight
-
-let inventoryCardName = "ItemCard"
-let inventoryPopupExitButtonName = "inventoryPopupExitBtn"
-
-
-
-
-
-
-
 //// //////////////////////////////////////////////////////// ////
 //// //////////////////////////////////////////////////////// ////
 ////                                                          ////
@@ -179,33 +21,34 @@ let inventoryPopupExitButtonName = "inventoryPopupExitBtn"
 //// //////////////////////////////////////////////////////// ////
 
 // Base (fraction width and height) (exact x and y)
-func createRect(name name: String, widthFraction: CGFloat, heightFraction: CGFloat, xExact: CGFloat, yExact: CGFloat, fillColor:  UIColor) -> SKShapeNode {
-    return createRectBase(name: name, rect: CGRect(x: xExact, y: yExact, width: widthFraction*SceneBase.sceneSize.width, height: heightFraction*SceneBase.sceneSize.height), fillColor: fillColor)
+func createRect(name name: String, widthFraction: CGFloat, heightFraction: CGFloat, xExact: CGFloat, yExact: CGFloat, fillColor:  UIColor) -> SKNode {
+    return createRectBase(name: name, size: CGSize(width: widthFraction, height: heightFraction), position: CGPoint(x: xExact, y: yExact), fillColor: fillColor)
 }
 
 // Base (fraction width and height) (exact x and y) (color = white)
-func createRect(name name: String, widthFraction: CGFloat, heightFraction: CGFloat, xExact: CGFloat, yExact: CGFloat) -> SKShapeNode {
-    return createRectBase(name: name, rect: CGRect(x: xExact, y: yExact, width: widthFraction*SceneBase.sceneSize.width, height: heightFraction*SceneBase.sceneSize.height), fillColor: UIColor.whiteColor())
+func createRect(name name: String, widthFraction: CGFloat, heightFraction: CGFloat, xExact: CGFloat, yExact: CGFloat) -> SKNode {
+    return createRectBase(name: name, size: CGSize(width: widthFraction, height: heightFraction), position: CGPoint(x: xExact, y: yExact), fillColor: UIColor.whiteColor())
 }
 
 // Base (exact width and height) (exact x and y)
-func createRect(name name: String, widthExact: CGFloat, heightExact: CGFloat, xExact: CGFloat, yExact: CGFloat, fillColor:  UIColor) -> SKShapeNode {
-    return createRectBase(name: name, rect: CGRect(x: xExact, y: yExact, width: widthExact, height: heightExact), fillColor: fillColor)
+func createRect(name name: String, widthExact: CGFloat, heightExact: CGFloat, xExact: CGFloat, yExact: CGFloat, fillColor:  UIColor) -> SKNode {
+    return createRectBase(name: name, size: CGSize(width: widthExact, height: heightExact), position: CGPoint(x: xExact, y: yExact), fillColor: fillColor)
 }
 
 // Base (exact width and height) (exact x and y) (color = white)
-func createRect(name name: String, widthExact: CGFloat, heightExact: CGFloat, xExact: CGFloat, yExact: CGFloat) -> SKShapeNode {
-    return createRectBase(name: name, rect: CGRect(x: xExact, y: yExact, width: widthExact, height: heightExact), fillColor: UIColor.whiteColor())
+func createRect(name name: String, widthExact: CGFloat, heightExact: CGFloat, xExact: CGFloat, yExact: CGFloat) -> SKNode {
+    return createRectBase(name: name, size: CGSize(width: widthExact, height: heightExact), position: CGPoint(x: xExact, y: yExact), fillColor: UIColor.whiteColor())
 }
 
 // Base
-func createRectBase(name name: String, rect: CGRect, fillColor:  UIColor) -> SKShapeNode {
-    let sknode = SKShapeNode(rect: rect)
-    sknode.fillColor = fillColor
-    sknode.name = name
+func createRectBase(name name: String, size: CGSize, position: CGPoint, fillColor:  UIColor) -> SKSpriteNode {
+    let skNode = SKSpriteNode(color: fillColor, size: size)
+    skNode.name = name
+    skNode.position = position
     
-    return sknode
+    return skNode
 }
+
 
 
 
@@ -267,6 +110,7 @@ func createLabelBase(name name: String, text: String, position: CGPoint, textSiz
 
 
 
+
 //// ///////////////////////////////////////////////////////// ////
 //// ///////////////////////////////////////////////////////// ////
 ////                                                           ////
@@ -274,30 +118,24 @@ func createLabelBase(name name: String, text: String, position: CGPoint, textSiz
 ////                                                           ////
 //// ///////////////////////////////////////////////////////// ////
 //// ///////////////////////////////////////////////////////// ////
-func createSimpleButton(name name: String, text: String, x: CGFloat, y: CGFloat, widthExact: CGFloat, heightExact: CGFloat, textColor: UIColor, fillColor: UIColor) -> SKNode {
+func createSimpleButtonCentered(name name: String, text: String, x: CGFloat, y: CGFloat, widthExact: CGFloat, heightExact: CGFloat, textColor: UIColor, fillColor: UIColor) -> SKNode {
     
     let btn = SKNode()
     btn.name = name
     
-    let label = createLabelTextCentered(name: name, text: text, x: x + (widthExact/2), y: y + (heightExact/2), textColor: textColor)
+    let label = createLabelTextCentered(name: name, text: text, x: x, y: y, textColor: textColor)
     btn.addChild(label)
     
     let back = createRect(name: name, widthExact: widthExact, heightExact: heightExact, xExact: x, yExact: y, fillColor: fillColor)
     btn.addChild(back)
     
     return btn
-    
 }
 
-/*func createBaseButton(skNodeShape skNodeShape: SKShapeNode, skNodeLabel: SKLabelNode) -> SKNode {
-    let skNodeParent = SKNode()
-    skNodeParent.name = skNodeShape.name
-    
-    skNodeParent.addChild(skNodeShape)
-    skNodeParent.addChild(skNodeLabel)
-    
-    return skNodeParent
-}*/
+func createSimpleButtonBottomLeftOrigin(name name: String, text: String, x: CGFloat, y: CGFloat, widthExact: CGFloat, heightExact: CGFloat, textColor: UIColor, fillColor: UIColor) -> SKNode {
+    return createSimpleButtonCentered(name: name, text: text, x: x + (widthExact/2), y: y + (heightExact/2), widthExact: widthExact, heightExact: heightExact, textColor: textColor, fillColor: fillColor)
+}
+
 
 
 
@@ -310,20 +148,20 @@ func createSimpleButton(name name: String, text: String, x: CGFloat, y: CGFloat,
 ////                                                           ////
 //// ///////////////////////////////////////////////////////// ////
 //// ///////////////////////////////////////////////////////// ////
-func createTestItem(name name: String, text: String, x: CGFloat, y: CGFloat) -> ItemNode {
+func createTestItem(name name: String, text: String, x: CGFloat, y: CGFloat) -> SKNode {
     let buttonWidth: CGFloat = 200
     let buttonHeight: CGFloat = 200
     
-    let skNodeShape = createRect(name: name, widthExact: buttonWidth, heightExact: buttonHeight, xExact: x-(buttonWidth/2), yExact: y-(buttonHeight/2), fillColor: UIColor.redColor())
+    let node = SKNode()
+    node.name = name + "ItemNode"
+    
+    let skNodeShape = createRect(name: name, widthExact: buttonWidth, heightExact: buttonHeight, xExact: x, yExact: y, fillColor: UIColor.redColor())
+    node.addChild(skNodeShape)
     
     let skNodeLabel = createLabelTextCentered(name: name, text: text, x: x, y: y, textColor: UIColor.whiteColor())
+    node.addChild(skNodeLabel)
     
-    let skNodeParent = ItemNode()
-    skNodeParent.addChild(skNodeShape)
-    skNodeParent.addChild(skNodeLabel)
-    skNodeParent.name = name + "ItemNode"
-    
-    return skNodeParent
+    return node
 }
 
 
@@ -331,40 +169,238 @@ func createTestItem(name name: String, text: String, x: CGFloat, y: CGFloat) -> 
 
 
 
-//// ////////////////////////////////////////////////////////// ////
-//// ////////////////////////////////////////////////////////// ////
-////                                                            ////
-////              Helper Functions - CREATE POP UPS             ////
-////                                                            ////
-//// ////////////////////////////////////////////////////////// ////
-//// ////////////////////////////////////////////////////////// ////
 
-func createMuteOverlay() -> SKShapeNode {
-    return createRect(name: "popupMuteOverlay", widthExact: SceneBase.frameWidth, heightExact: SceneBase.frameHeight, xExact: 0, yExact: 0, fillColor: colorPopupMute)
+//// //////////////////////////////////////////////////////////////////// ////
+//// //////////////////////////////////////////////////////////////////// ////
+////                                                                      ////
+////              Helper Functions - CREATE POP UPS (GENERAL)             ////
+////                                                                      ////
+//// //////////////////////////////////////////////////////////////////// ////
+//// //////////////////////////////////////////////////////////////////// ////
+
+func createMuteOverlay() -> SKNode {
+    return createRect(name: "popupMuteOverlay", widthExact: width, heightExact: height, xExact: widthMid, yExact: heightMid, fillColor: colorPopupMute)
 }
 
-func createPopupBack() -> SKShapeNode {
-    return createRect(name: "popupDisplayBack", widthExact: popupWidth, heightExact: popupHeight, xExact: popupLeftX, yExact: popupBottomY, fillColor: colorPopupBack)
+func createPopupWarningBack() -> SKNode {
+    return createRect(name: "popupDisplayBackWarning", widthExact: popupWarningWidth, heightExact: popupWarningHeight, xExact: widthMid, yExact: heightMid, fillColor: colorPopupBackWarning)
+}
+
+func createPopupBack() -> SKNode {
+    return createRect(name: "popupDisplayBack", widthExact: popupWidth, heightExact: popupHeight, xExact: widthMid, yExact: heightMid, fillColor: colorPopupBack)
 }
 
 // (centered)
-func createPopupGoButton(name name: String, text: String, x: CGFloat, y: CGFloat) -> SKNode {
+func createPopupButtonGo(name name: String, text: String, x: CGFloat, y: CGFloat) -> SKNode {
     
-    return createSimpleButton(name: name, text: text, x: x + (popupGoButtonWidth/2), y: y + (popupGoButtonHeight/2), widthExact: popupGoButtonWidth, heightExact: popupGoButtonHeight, textColor: colorPopupGoButtonText, fillColor: colorPopupGoButtonBack)
+    return createSimpleButtonCentered(name: name, text: text, x: x, y: y, widthExact: popupButtonGoWidth, heightExact: popupButtonGoHeight, textColor: colorPopupButtonGoText, fillColor: colorPopupButtonGoFill)
 }
 
-func createPopupSmallButton(name name: String, text: String, bright: Bool, onRight: Bool) -> SKNode {
+func createPopupButtonSmall(name name: String, text: String, bright: Bool, onRight: Bool) -> SKNode {
     let buttonX = (onRight) ? popupButtonRightX : popupButtonLeftX
-    let buttonBackColor = (bright) ? colorPopupSmallButtonBackBright : colorPopupSmallButtonBackMuted
-    let buttonTextColor = (bright) ? colorPopupSmallButtonTextBright : colorPopupSmallButtonTextMuted
+    let buttonBackColor = (bright) ? colorPopupButtonSmallFillBright : colorPopupButtonSmallFillMuted
+    let buttonTextColor = (bright) ? colorPopupButtonSmallTextBright : colorPopupButtonSmallTextMuted
     
-    return createSimpleButton(name: name, text: text, x: buttonX, y: popupButtonY, widthExact: popupButtonWidth, heightExact: popupButtonHeight, textColor: buttonTextColor, fillColor: buttonBackColor)
+    return createSimpleButtonBottomLeftOrigin(name: name, text: text, x: buttonX, y: popupButtonY, widthExact: popupButtonWidth, heightExact: popupButtonHeight, textColor: buttonTextColor, fillColor: buttonBackColor)
 }
 
-// (centered)
-func createPopupExitButton(name name: String, x: CGFloat, y: CGFloat) -> SKNode {
-    return createSimpleButton(name: name, text: "X", x: x, y: y, widthExact: exitButtonWidth, heightExact: exitButtonHeight, textColor: colorInventoryBackButtonText, fillColor: colorInventoryBackButtonFill)
+func createPopupButtonExit(name name: String, x: CGFloat, y: CGFloat) -> SKNode {
+    return createSimpleButtonBottomLeftOrigin(name: name, text: "X", x: x, y: y, widthExact: exitButtonWidth, heightExact: exitButtonHeight, textColor: colorInventoryButtonExitText, fillColor: colorInventoryButtonExitFill)
 }
+
+
+
+
+//// ///////////////////////////////////////////////////////////////////// ////
+//// ///////////////////////////////////////////////////////////////////// ////
+////                                                                       ////
+////              Helper Functions - CREATE POP UPS (SPECIFIC)             ////
+////                                                                       ////
+//// ///////////////////////////////////////////////////////////////////// ////
+//// ///////////////////////////////////////////////////////////////////// ////
+func createItemDetail() -> SKNode {
+	let node = SKNode()
+	node.name = "itemDetail"
+	node.zPosition = zPositionItemDetail
+	
+	// mute overlay
+	let muteOverlay = createMuteOverlay()
+	node.addChild(muteOverlay)
+	
+	// display back
+	let displayBack = createPopupBack()
+	node.addChild(displayBack)
+	
+	// cancel
+	let cancelButton = createPopupButtonSmall(name: popupButtonCancel, text: "Cancel", bright: false, onRight: false)
+	node.addChild(cancelButton)
+	
+	// confirm
+	let confirmButton = createPopupButtonSmall(name: popupButtonConfirm, text: "Confirm", bright: true, onRight: true)
+	node.addChild(confirmButton)
+	
+	// item image TODO
+	
+	// item name TODO
+	
+	// item desc TODO
+	
+	return node
+}
+
+func createErrorMoney() -> SKNode {
+    let node = SKNode()
+    node.name = "moneyWarning"
+    node.zPosition = zPositionItemDetailPopup
+    
+    // mute
+    let mute = createMuteOverlay()
+    node.addChild(mute)
+    
+    /// display back
+    let displayBack = createPopupWarningBack()
+    node.addChild(displayBack)
+    
+    // confirm
+    let confirmButton = createPopupButtonGo(name: popupButtonBuyMessageOk, text: "OKAY", x: widthMid, y: heightMid)
+    node.addChild(confirmButton)
+    
+    // item warning message TODO
+    
+    // done
+    return node
+}
+
+func createBuyMessage() -> SKNode {
+    let node = SKNode()
+    node.name = "buyMessage"
+    node.zPosition = zPositionItemDetailPopup
+    
+    // mute
+    let mute = createMuteOverlay()
+    node.addChild(mute)
+    
+    /// display back
+    let displayBack = createPopupWarningBack()
+    node.addChild(displayBack)
+    
+    // item buy confirmation message TODO
+    
+    // confirm
+    let confirmButton = createPopupButtonGo(name: popupButtonBuyMessageOk, text: "OKAY", x: widthMid, y: popupButtonWarningY)
+    node.addChild(confirmButton)
+    
+    // done
+    return node
+}
+
+func createChangeStats() -> SKNode {
+    let node = SKNode()
+    node.name = "changingStats"
+	node.zPosition = zPositionItemDetailPopup + 1
+	
+	// mute
+    let mute = createMuteOverlay()
+    node.addChild(mute)
+    
+    /// display back
+    let displayBack = createPopupWarningBack()
+    node.addChild(displayBack)
+    
+    // confirm
+    let confirmButton = createPopupButtonGo(name: popupButtonStatsChangingOk, text: "OKAY", x: popupButtonWarningX, y: popupButtonWarningY)
+    node.addChild(confirmButton)
+	
+	// changing stats TODO
+    
+    // done
+    return node
+}
+
+
+
+
+
+
+
+//// //////////////////////////////////////////////////////////////////// ////
+//// //////////////////////////////////////////////////////////////////// ////
+////                                                                      ////
+////              Helper Functions - CREATE MAIN MENU OVERLAY             ////
+////                                                                      ////
+//// //////////////////////////////////////////////////////////////////// ////
+//// //////////////////////////////////////////////////////////////////// ////
+func createInventoryButton() -> SKNode {
+    return createRect(
+        name: menuInventoryButtonName,
+        widthExact: menuInventoryButtonWidth, heightExact: menuInventoryButtonHeight,
+        xExact: menuInventoryButtonX, yExact: menuInventoryButtonY)
+}
+
+func createMoneyStats() -> SKNode {
+    let node = SKNode()
+    node.name = statusMoneyNodeName
+    
+    // dollar sign
+    let moneyLabelBack = createRect(name: "moneyStatus", widthExact: statusLabelWidth, heightExact: statusLabelHeight, xExact: statusMoneyLabelX, yExact: statusLabelY, fillColor: colorStatusMoneyLabelFill)
+    node.addChild(moneyLabelBack)
+    let moneyLabel = createLabelTextCentered(name: "moneyStatus", text: "$", x: statusMoneyLabelX, y: statusLabelY, textColor: colorStatusMoneyLabelText)
+    node.addChild(moneyLabel)
+    
+    // bar back
+    let moneyBarBack = createStatusBarBack(name: "moneyStatus", x: statusMoneyBarX, y: statusBarY)
+    node.addChild(moneyBarBack)
+    
+    // bar level
+    let moneyBarLevelWidth = calcBarWidth(width: statusBarWidth, total: moneyTotal, max: moneyDataOrigin[currentLevel]["max"]! as Int)
+    let moneyBarLevel = createStatusBarLevel(name: statusMoneyBarLevelName, x: statusMoneyBarLevelXLeft + (moneyBarLevelWidth/2), y: statusBarY, width: moneyBarLevelWidth)
+    node.addChild(moneyBarLevel)
+    
+    return node
+}
+
+func createTraitsStats() -> SKNode {
+    let node = SKNode()
+    node.name = statusTraitsNodeName
+    
+    var runningXLeft = statusMoneyBarX + (statusBarWidth/2) + (menuPadding)
+    var index = 0
+    for trait in traitsDataOrigin {
+        
+        // bar back
+        let traitBarBack = createStatusBarBack(name: "traitStatus", x: runningXLeft + (statusBarWidth/2), y: statusBarY)
+        node.addChild(traitBarBack)
+        
+        // bar level
+        let traitWidth = calcBarWidth(width: statusBarLevelMaxWidth, total: trait["value"] as! Int, max: trait["max"] as! Int)
+        let traitBarLevel = createStatusBarLevel(name: trait["name"] as! String, x: runningXLeft + (statusBarPadding/2) + (traitWidth/2), y: statusBarY, width: traitWidth)
+        node.addChild(traitBarLevel)
+        
+        // increase running X
+        runningXLeft += (statusBarWidth + (menuPadding))
+        index += 1
+    }
+    
+    return node
+}
+
+func createStatusBarBack(name name: String, x: CGFloat, y: CGFloat) -> SKNode {
+    return createRect(name: name, widthExact: statusBarWidth, heightExact: statusBarHeight, xExact: x, yExact: y, fillColor:  colorStatusMoneyBarBack)
+}
+func createStatusBarLevel(name name: String, x: CGFloat, y: CGFloat, width: CGFloat) -> SKNode {
+    return createRect(name: name, widthExact: width, heightExact: statusBarLevelHeight, xExact: x, yExact: y, fillColor:  colorStatusMoneyBarLevel)
+}
+
+func createNextSceneButton() -> SKNode {
+    let node = SKNode()
+    node.name = "nextScene"
+    
+    let btn = createSimpleButtonCentered(name: nextSceneButtonName, text: "Next Level", x: nextSceneButtonX, y: nextSceneButtonY, widthExact: nextSceneButtonWidth, heightExact: nextSceneButtonHeight, textColor: colorNextSceneText, fillColor: colorNextSceneFill)
+    node.addChild(btn)
+    
+    return node
+}
+
 
 
 
@@ -390,16 +426,12 @@ func createInventoryMenu() -> SKNode {
     var runningX: CGFloat = 0
     
     
-    
-    
     //////////////////////////////
     //      inventory back      //
     //////////////////////////////
     inv.addChild(
-        createRect(name: "inventoryBack", widthExact: SceneBase.frameWidth, heightExact: SceneBase.frameHeight, xExact: 0, yExact: 0, fillColor: colorGreyLight)
+        createRect(name: "inventoryBack", widthExact: width, heightExact: height, xExact: widthMid, yExact: heightMid, fillColor: colorGreyLight)
     )
-    
-    
     
     
     //////////////////////////
@@ -409,14 +441,13 @@ func createInventoryMenu() -> SKNode {
     invHeaderMenu.name = "inventoryMenuHeader"
     
     // exit button
-    let backBtn = createSimpleButton(name: inventoryExitButtonName, text: "X", x: SceneBase.frameWidth - inventoryPadding - exitButtonWidth, y: (SceneBase.frameHeight - exitButtonHeight - inventoryPadding), widthExact: exitButtonWidth, heightExact: exitButtonHeight, textColor: colorInventoryBackButtonText, fillColor: colorInventoryBackButtonFill)
+    let backBtn = createPopupButtonExit(name: inventoryExitButtonName, x: inventoryButtonExitX, y: inventoryButtonExitY)
     invHeaderMenu.addChild(backBtn)
-    
     
     runningX = inventoryPadding
     
     // title
-    let title = createLabelTitleLeftJustified(name: "inventoryTitle", text: "Inventory", x: runningX, y: (SceneBase.frameHeight-inventoryPadding), textColor: colorInventoryTitle )
+    let title = createLabelTitleLeftJustified(name: "inventoryTitle", text: "Inventory", x: runningX, y: (height-inventoryPadding), textColor: colorInventoryTitle )
     invHeaderMenu.addChild(title)
     
     // coins TODO
@@ -425,8 +456,6 @@ func createInventoryMenu() -> SKNode {
     
     // done
     inv.addChild(invHeaderMenu)
-    
-    
     
     
     ////////////////////////
@@ -438,34 +467,11 @@ func createInventoryMenu() -> SKNode {
     runningX = inventoryPadding
     
     // TODO remove this and implement multiple tabs, this is code for one single tab
-    let btn = createSimpleButton(name: inventoryTabNameAll, text: "All", x: runningX, y: inventoryTabMenuY, widthExact: inventoryTabWidth, heightExact: inventoryTabHeight, textColor: colorInventoryTabText, fillColor: colorInventoryTabBack)
+    let btn = createSimpleButtonBottomLeftOrigin(name: inventoryTabNameAll, text: "All", x: runningX, y: inventoryTabMenuY, widthExact: inventoryTabWidth, heightExact: inventoryTabHeight, textColor: colorInventoryTabText, fillColor: colorInventoryTabBack)
     invTabsMenu.addChild(btn)
-    
-    // TODO add tabs, removed for easy
-    /*
-     // traits
-     for trait in femTraits + [inventoryTabMasName] {
-     // create label
-     let label = createLabelTextCentered(name: trait+inventoryTabNameSuffix, text: trait, x: runningX + (inventoryTabWidth/2), y: inventoryTabMenuY + (inventoryTabHeight/2), textColor: colorInventoryTabText)
-     
-     // create back
-     let back = createRect(name: trait+"TabBtn", widthExact: inventoryTabWidth, heightExact: inventoryTabHeight, xExact: runningX, yExact: inventoryTabMenuY, fillColor: colorInventoryTabBack)
-     
-     // create button
-     let btn = createBaseButton(skNodeShape: back, skNodeLabel: label)
-     
-     // add to tab menu
-     invTabsMenu.addChild(btn)
-     
-     // incrament runningX
-     runningX += inventoryPadding + inventoryTabWidth
-     }
-     */
     
     // done
     inv.addChild(invTabsMenu)
-    
-    
     
     
     ////////////////////////////////
@@ -474,9 +480,9 @@ func createInventoryMenu() -> SKNode {
     let invDisplay = SKNode();
     invDisplay.name = "invDisplay"
     
-    runningX = inventoryPadding
+    runningX = inventoryPadding + (inventoryCardWidth/2)
     
-    let invDisplayContainer = createRect(name: "invDisplayContainer", widthExact: inventoryDisplayContainerWidth, heightExact: inventoryDisplayContainerHeight, xExact: 0, yExact: 0, fillColor: colorInventoryDisplayContainerBack)
+    let invDisplayContainer = createRect(name: "invDisplayContainer", widthExact: inventoryDisplayContainerWidth, heightExact: inventoryDisplayContainerHeight, xExact: widthMid, yExact: inventoryDisplayContainerY, fillColor: colorInventoryDisplayContainerBack)
     invDisplay.addChild(invDisplayContainer)
     
     inventoryDisplayContainerWidthRunning = 0
@@ -484,39 +490,45 @@ func createInventoryMenu() -> SKNode {
     // loop through all inventory items
     //print("---------- Inventory Items (SKHelper) ----------")
     //print(inventoryItems)
-    for item in inventoryItems {
-        //print(item)
-        // item card
-        let itemCard = SKNode()
-        let n = item.name + inventoryCardName
-        itemCard.name = n
-        
-        // item back
-        let itemBack = createRect(name: n, widthExact: inventoryCardWidth, heightExact: inventoryCardHeight, xExact: runningX, yExact: inventoryCardY, fillColor: colorInventoryCardBack)
-        itemCard.addChild(itemBack)
-        
-        // image of item TODO
-        
-        // title
-        let title = createLabelTitleCentered(name: n, text: item.detailName, x: runningX + (inventoryCardWidth/2), y: inventoryCardTop - 50, textColor: colorInventoryCardTitle)
-        itemCard.addChild(title)
-        
-        // description TODO
-        
-        // more info btn TODO
-        
-        // finish
-        invDisplay.addChild(itemCard)
-        
-        // incrament X
-        runningX += inventoryCardWidth + inventoryPadding
+    for itemCategory in allItems {
+        for item in itemCategory {
+            
+            // check if want to display item (owns is more than 0)
+            if(item.owns > 0) {
+                //print(item)
+                // item card
+                let itemCard = SKNode()
+                let n = item.name + inventoryCardName
+                itemCard.name = n
+                
+                // item back
+                let itemBack = createRect(name: n, widthExact: inventoryCardWidth, heightExact: inventoryCardHeight, xExact: runningX, yExact: inventoryCardY, fillColor: colorInventoryCardBack)
+                itemCard.addChild(itemBack)
+                
+                // image of item TODO
+                
+                // title
+                let title = createLabelTitleCentered(name: n, text: item.detailName, x: runningX, y: inventoryCardTop - 50, textColor: colorInventoryCardTitle)
+                itemCard.addChild(title)
+                
+                // description TODO
+                
+                // more info btn TODO
+                
+                // number of owns TODO
+                
+                // finish
+                invDisplay.addChild(itemCard)
+                
+                // incrament X
+                runningX += inventoryCardWidth + inventoryPadding
+            }
+        }
     }
     inventoryDisplayContainerWidthRunning = runningX + inventoryCardWidth + inventoryPadding
     
     // done
     inv.addChild(invDisplay)
-    
-    
     
     
     ///////////////////
@@ -526,7 +538,7 @@ func createInventoryMenu() -> SKNode {
     
 }
 
-func createInventoryItemDetail() -> SKNode {
+func createInventoryItemDetailPopup() -> SKNode {
     let popup = SKNode()
     
     let mute = createMuteOverlay()
@@ -535,7 +547,7 @@ func createInventoryItemDetail() -> SKNode {
     let dialogue = createPopupBack()
     popup.addChild(dialogue)
     
-    let exitBtn = createPopupExitButton(name: inventoryPopupExitButtonName, x: popupRightX - popupPadding - exitButtonWidth, y: popupTopY - (popupPadding*2) - exitButtonHeight)
+    let exitBtn = createPopupButtonExit(name: inventoryPopupExitButtonName, x: popupRightX - popupPadding - exitButtonWidth, y: popupTopY - (popupPadding*2) - exitButtonHeight)
     popup.addChild(exitBtn)
     
     return popup
@@ -554,7 +566,7 @@ func createInventoryItemDetail() -> SKNode {
 //// //////////////////////////////////////////////////////// ////
 //// //////////////////////////////////////////////////////// ////
 func calcXForFarRight(itemWidth: CGFloat) -> CGFloat {
-    return SceneBase.sceneSize.width - itemWidth
+    return width - itemWidth
 }
 
 func centerTextLabelInRect(label label: SKLabelNode, rectX: CGFloat, rectY: CGFloat, rectWidth: CGFloat, rectHeight: CGFloat) {
@@ -562,4 +574,8 @@ func centerTextLabelInRect(label label: SKLabelNode, rectX: CGFloat, rectY: CGFl
     let labelHeight = label.frame.height
     label.position.x = rectX + ((rectWidth-labelWidth) / 2)
     label.position.y = rectY + (rectHeight/2) + (labelHeight/2)
+}
+
+func calcBarWidth(width width: CGFloat, total: Int, max: Int) -> CGFloat {
+    return min(width * (CGFloat(total) / CGFloat(max)), CGFloat(max))
 }

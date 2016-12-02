@@ -26,33 +26,4 @@ class SceneTeens: SceneBase {
         
         self.addChild(myLabel)
     }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            let touchedNode = self.nodeAtPoint(location)
-            
-            //print("x: \(location.x)")
-            //print("y: \(location.y)")
-            
-            if let name = touchedNode.name
-            {
-                if name == "playButton"
-                {
-                    //print("Touched")
-                    stateChangeNext()
-                }
-            }
-        }
-    }
-    
-    override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
-    }
-    
-    
-    
-    
-    
-
 }

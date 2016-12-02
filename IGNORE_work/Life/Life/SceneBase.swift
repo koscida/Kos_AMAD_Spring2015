@@ -6,59 +6,45 @@
 //  Copyright © 2016 Kode Studios. All rights reserved.
 //
 
+
 import SpriteKit
 
 class SceneBase: SKScene {
-
-    static var state = 0;
     
     // frame sizing and scale
     static var sceneScale:CGFloat = 0;
     static var sceneSize:CGSize = CGSize()
-    
-    static var frameWidth: CGFloat {
-        set {}
-        get { return SceneBase.sceneSize.width }
-    }
-    static var frameCenterWidth: CGFloat {
-        set {}
-        get { return SceneBase.sceneSize.width/2 }
-    }
-    static var frameHeight: CGFloat {
-        set {}
-        get { return SceneBase.sceneSize.height }
-    }
-    static var frameCenterHeight: CGFloat {
-        set {}
-        get { return SceneBase.sceneSize.height/2 }
-    }
     
     
     // create nodes for parts of the screen
     var contentNode = SKNode()
     var animationNode = SKNode()
     var menuOverlayNode = SKNode()
-    var popupOverlayNode = SKNode()
+    var menuOverlayStatsNode = SKNode()
+    var itemDetailNode = SKNode()
+    var itemDetailPopupNode = SKNode()
     var inventoryNode = SKNode()
     var inventoryPopupNode = SKNode()
     
-    var sceneState = 0
+    var levelMode = levelMode_Start
     var itemSelected = Item()
     
     var hasCreatedInventoryMenu = false
     
     
-    // does not get called - scene children override
+    
     override func didMoveToView(view: SKView) {
         
-        name = sceneNameBase
+        name = levelNameBase
         //print(sceneNameBase + " - didMoveToView")
         
         // setup the z positions for all the nodes
         contentNode.zPosition = zPositionContent
         animationNode.zPosition = zPositionAnimations
         menuOverlayNode.zPosition = zPositionMenuOverlay
-        popupOverlayNode.zPosition = zPositionPopup
+        menuOverlayStatsNode.zPosition = zPositionMenuOverlayStats
+        itemDetailNode.zPosition = zPositionItemDetail
+        itemDetailPopupNode.zPosition = zPositionItemDetailPopup
         inventoryNode.zPosition = zPositionInventory
         inventoryPopupNode.zPosition = zPositionInventoryPopup
         
@@ -66,17 +52,30 @@ class SceneBase: SKScene {
         contentNode.name = nameContentNode
         animationNode.name = nameAnimationsNode
         menuOverlayNode.name = nameMenuOverlayNode
-        popupOverlayNode.name = namePopupNode
+        menuOverlayStatsNode.name = nameMenuOverlayStatsNode
+        itemDetailNode.name = nameItemDetailNode
+        itemDetailPopupNode.name = nameItemDetailPopupNode
         inventoryNode.name = nameInventoryNode
         inventoryPopupNode.name = nameInventoryPopupNode
         
+        
+        // set scene values
+        moneyTotal += moneyDataOrigin[currentLevel]["levelAddValue"]! as Int
+        // TODO - animation that adds money for each level
+        
+        
+        // creating and adding content to the page
+        createContent_Main()
+        createContent_MenuOverlay()
+ 
     }
     
     
-    
-    /////////////////////////////////
-    //          Touches            //
-    /////////////////////////////////
+    /////////////////////////////////////
+    /////////////////////////////////////
+    ////          Touches            ////
+    /////////////////////////////////////
+    /////////////////////////////////////
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         //print("---------- TOUCHES BEGAN (" + sceneNameBase + ") ----------")
         
@@ -86,29 +85,31 @@ class SceneBase: SKScene {
             
             //print("x: \(location.x)")
             //print("y: \(location.y)")
-            //print(touchedNode)
+            print(touchedNode)
             
             if let name = touchedNode.name {
                 
                 ////////////////////////////
                 //  menu overlay buttons  //
                 ////////////////////////////
-                if name == menuInventoryButtonName {
-                    createContent_InventoryMenu()
-                }
+                
                 
                 ////////////////////////////
                 //  inventory buttons     //
                 ////////////////////////////
+				if name == menuInventoryButtonName {
+					runAction_SelectInventoryMenu()
+				}
                 // exit inventory button
                 if name == inventoryExitButtonName {
                     runAction_ExitInventoryMenu()
                 }
                 // inventory item selected
-                for item in inventoryItems {
-                    if name == item.name + inventoryCardName {
-                        runAction_SelectInventoryItem(item: item)
-                        print(name + " in item card")
+                for itemCategory in allItems {
+                    for item in itemCategory {
+                        if name == item.name + inventoryCardName {
+                            runAction_SelectInventoryItem(item: item)
+                        }
                     }
                 }
                 // exit inventory item detail
@@ -116,106 +117,194 @@ class SceneBase: SKScene {
                     runAction_ExitInventoryPopup()
                 }
                 
-                // TODO add tab logic when changing from one single tab to multiple tabs
+                ////////////////////////////
+                //  next scene button     //
+                ////////////////////////////
+                if name == nextSceneButtonName {
+                    runLogic_NextLevel()
+                }
+                
+                
+                switch levelMode {
+                
+                /////////////////////////
+                //  item selection     //
+                /////////////////////////
+                // regular scene, no popups are being displayed
+                case levelMode_Start:
+                    // loop through items might have selected
+                    for item in allItems[currentLevel] {
+                        // check if an item
+                        if name == item.name + itemNameSuffix {
+                            print("running on: " + name)
+                            runAction_ShowItemDetail(item)
+                        }
+                    }
+                    
+                //////////////////////
+                //  item detail     //
+                //////////////////////
+                // informational display popup is being displayed
+                case levelMode_ItemDetail, levelMode_ItemDetail_Message, levelMode_ItemDetail_ErrorMoney, levelMode_ItemDetail_ChangingStats :
+					// cancel from item detail
+                    if name == popupButtonCancel {
+                        runAction_ExitItemDetail()
+					}
+					// buy item from item detail
+                    else if name == popupButtonConfirm {
+						runLogic_AttemptBuyItem() // run logic, since there are three options for this action (error, message, actual buy)
+					}
+					// ok from message (consending)
+					else if name == popupButtonBuyMessageOk {
+						runAction_ExitBuyMessage()
+					}
+					// ok from error (out of money)
+                    else if name == popupButtonErrorOk {
+                        runAction_ExitErrorMoney()
+					}
+					// ok from stats changing
+					else if name == popupButtonStatsChangingOk {
+					
+						runAction_ExitChangingStats()
+					}
+					
+                    
+                default:
+                    break
+                     
+                }
             }
         }
     }
-
     
     
+    ////////////////////////////////////
+    ////////////////////////////////////
+    ////          Update            ////
+    ////////////////////////////////////
+    ////////////////////////////////////
+    override func update(currentTime: CFTimeInterval) {
+        /* Called before each frame is rendered */
+    }
     
     
-    /////////////////////////////////////
-    //          Scene Setup            //
-    /////////////////////////////////////
+    /////////////////////////////////////////
+    /////////////////////////////////////////
+    ////          Scene Setup            ////
+    /////////////////////////////////////////
+    /////////////////////////////////////////
+    
+    //////////////////
+    //  main scene  //
+    //////////////////
+    func createContent_Main() {
+        print("createContent_Main (SceneBase) " + name!)
+        
+        // put items on screen
+        // TODO change this to sprites
+        var xCount:CGFloat = 200
+        for item in allItems[currentLevel] {
+            contentNode.addChild(createTestItem(name: item.name + itemNameSuffix, text: item.detailName, x: xCount, y: heightMid))
+            xCount += 300
+        }
+        
+        self.addChild(contentNode)
+    }
+    
+    /////////////////
+    //  main menu  //
+    /////////////////
     func createContent_MenuOverlay() {
-        print("createContent_MenuOverlay " + name!)
+        print("createContent_MenuOverlay (SceneBase) " + name!)
         
         // inventory
-        let inventoryBtn = createRect(name: menuInventoryButtonName, widthExact: menuInventoryButtonWidth, heightExact: menuInventoryButtonHeight, xExact: menuInventoryButtonX, yExact: menuInventoryButtonY)
-        menuOverlayNode.addChild(inventoryBtn)
+        menuOverlayNode.addChild(createInventoryButton())
         
-        // money TODO
         
-        // stats TODO
+        // money
+        let moneyNode = createMoneyStats()
+        menuOverlayStatsNode.addChild(moneyNode)
+        
+        // stats
+        let traitsNode = createTraitsStats()
+        menuOverlayStatsNode.addChild(traitsNode)
+        
+        menuOverlayNode.addChild(menuOverlayStatsNode)
+        
+        
+        // next scene
+        let nextSceneButton = createNextSceneButton()
+        menuOverlayNode.addChild(nextSceneButton)
         
         
         // add menu overlay
         self.addChild(menuOverlayNode)
     }
     
-    func createContent_InventoryMenu() {
-        print("createContent_InventoryMenu " + name!)
-        
-        // TODO optimize this, just refresh the inventory display instead of re-creating the entire inventory menu every time
-        if !hasCreatedInventoryMenu || true {
-            //print("creating inventory menu")
-            
-            
-            let inv = createInventoryMenu()
-            inventoryNode.addChild(inv)
-            
-            
-            // code for movable scrolling view
-            //let invDisplayMovable = SKNode() // replacing with: invDisplayMovable
-            /*
-            let scrollView = CustomScrollView(
-                frame: CGRect(x: 0, y: 0, width: inventoryDisplayContainerWidth, height:inventoryDisplayContainerHeight),
-                scene: self,
-                moveableNode: invDisplayMovable,
-                scrollDirection: .horizontal)
-            
-            scrollView.contentSize = CGSizeMake(inventoryDisplayContainerWidthRunning, inventoryDisplayContainerHeight)
-            
-            view?.addSubview(scrollView)
-             */
-            
-            //addChild(invDisplayMovable) // replacing with: inventoryNode.addChild(invDisplayMovable)
-            
-            // soon
-            //scrollView?.removeFromSuperView()
-            
-            
-            
-            
-            // set created to true
-            hasCreatedInventoryMenu = true
-        }
-        
-        
-        // remove the main content for optimal perf (menu overlay is left on)
-        contentNode.removeFromParent()
-        
-        // add inventory node
-        self.addChild(inventoryNode)
-        
-        //print("---------- SELF CHILDREN (FROM SceneBase) -----------")
-        //printAllNodes(self)
-    }
     
     
     
     
-    ////////////////////////////////////
-    //          Game Logic            //
-    ////////////////////////////////////
+    //////////////////////////////////////////
+    //////////////////////////////////////////
+    ////          Game Actions            ////
+    //////////////////////////////////////////
+    //////////////////////////////////////////
+    
+    /////////////////
+    //  inventory  //
+    /////////////////
+	func runAction_SelectInventoryMenu() {
+		print("runAction_SelectInventoryMenu (SceneBase) " + name!)
+		
+		// change mode
+		levelMode = levelMode_Inventory
+		
+		// TODO optimize this, just refresh the inventory display instead of re-creating the entire inventory menu every time
+		if !hasCreatedInventoryMenu || true {
+			//print("creating inventory menu")
+			
+			let inv = createInventoryMenu()
+			inventoryNode.addChild(inv)
+			
+			// set created to true
+			hasCreatedInventoryMenu = true
+		}
+		
+		// remove the main content for optimal perf (menu overlay is left on)
+		contentNode.removeFromParent()
+		menuOverlayNode.removeFromParent()
+		
+		
+		// add inventory node
+		self.addChild(inventoryNode)
+		
+		//print("---------- SELF CHILDREN (FROM SceneBase) -----------")
+		//printAllNodes(self)
+	}
+	
     func runAction_ExitInventoryMenu() {
-        print("runAction_ExitInventoryMenu")
+        print("runAction_ExitInventoryMenu (SceneBase) " + name! + "\n")
         
+		// change mode
+		levelMode = levelMode_Start
+		
         // add main content back to screen
         self.addChild(contentNode)
+        self.addChild(menuOverlayNode)
         
         // remove inventory menu from screen
         inventoryNode.removeFromParent()
     }
     
     func runAction_SelectInventoryItem(item item: Item) {
-        print("runAction_SelectInventoryItem")
+        print("runAction_SelectInventoryItem (SceneBase) " + name!)
         
-        // change state to inventory item selected
+        // change mode
+		levelMode = levelMode_Inventory_ItemDetail
         
         // create inventory item detail popup
-        let invDetail = createInventoryItemDetail()
+        let invDetail = createInventoryItemDetailPopup()
         
         // add to creater inventory popup
         inventoryPopupNode.addChild(invDetail)
@@ -225,8 +314,11 @@ class SceneBase: SKScene {
     }
     
     func runAction_ExitInventoryPopup() {
-        print("runAction_ExitInventoryPopup")
+        print("runAction_ExitInventoryPopup (SceneBase) " + name! + "\n")
         
+		// change mode
+		levelMode = levelMode_Inventory
+		
         // delete inventory popup's content
         inventoryPopupNode.removeAllChildren()
         
@@ -234,90 +326,264 @@ class SceneBase: SKScene {
         inventoryPopupNode.removeFromParent()
     }
     
+	
+    //////////////////////////////////////
+    //  item detail - show item detail  //
+    //////////////////////////////////////
+    func runAction_ShowItemDetail(item: Item) {
+        print("runAction_ShowItemDetail (SceneBase) " + name!)
+		
+		// change mode
+        levelMode = levelMode_ItemDetail
+		
+		// save this!
+        itemSelected = item
+		
+		// create the item detail popup
+		itemDetailNode.addChild(createItemDetail())
+		addChild(itemDetailNode)
+	}
+	
+    func runAction_ExitItemDetail() {
+        print("runAction_ExitItemDetail (SceneBase) " + name! + "\n")
+		
+		// change mode
+        levelMode = levelMode_Start
+		
+		// remove entire popup
+        itemDetailNode.removeAllChildren()
+        itemDetailNode.removeFromParent()
+    }
+	
+	////////////////////////////////////////
+	//  item detail - concending message  //
+	////////////////////////////////////////
+	func runAction_ShowBuyMessage() {
+		print("runAction_ShowBuyMessage (SceneBase) " + name!)
+		
+		// change mode
+		levelMode = levelMode_ItemDetail_Message
+		
+		// add message popup to item detail popup
+		itemDetailPopupNode.addChild(createBuyMessage())
+		addChild(itemDetailPopupNode)
+	}
+	func runAction_ExitBuyMessage() {
+		print("runAction_ExitBuyMessage (SceneBase) " + name! + "\n")
+		
+		// change mode
+		levelMode = levelMode_ItemDetail
+		
+		// remove the message popup
+		itemDetailPopupNode.removeAllChildren()
+		itemDetailPopupNode.removeFromParent()
+		
+		// will automatically go back to item detail (no code needed for that action)
+	}
+	
+	
+	///////////////////////////////////
+	//  item detail - error - money  //
+	///////////////////////////////////
+	func runAction_ShowErrorMoney() {
+		print("runAction_ShowErrorMoney (SceneBase) " + name!)
+		
+		// change mode
+		levelMode = levelMode_ItemDetail_ErrorMoney
+		
+		// add message popup to item detail popup
+		itemDetailPopupNode.addChild(createErrorMoney())
+		addChild(itemDetailPopupNode)
+	}
+	func runAction_ExitErrorMoney() {
+		print("runAction_ExitErrorMoney (SceneBase) " + name! + "\n")
+		
+		// change mode
+		levelMode = levelMode_ItemDetail
+		
+		// remove the error popup
+		itemDetailPopupNode.removeAllChildren()
+		itemDetailPopupNode.removeFromParent()
+		
+		// exit from item detail also
+		runAction_ExitItemDetail()
+	}
+	
+	
+	/////////////////////////////////////
+	//  item detail - changing stats   //
+	/////////////////////////////////////
+	func runAction_ShowChangingStats() {
+		print("runAction_ShowChangingStats (SceneBase) " + name!)
+		
+		// change mode
+		levelMode = levelMode_ItemDetail_ChangingStats
+		
+		// display stats changing - TODO animate this
+		itemDetailPopupNode.addChild(createChangeStats())
+		addChild(itemDetailPopupNode)
+		
+		// actually change the stats in the data models
+		var key = 0
+		for traitValueChange in itemSelected.traitValueChanges {
+			traitsDataOrigin[key]["value"] = (traitsDataOrigin[key]["value"] as! Int) + traitValueChange
+			key += 1
+		}
+		
+		// save the new item and stats to plist
+		saveItemsToDisk()
+		
+		// update things that are on the start screen
+		runAction_UpdateMenuOverlayStats()
+	}
+	func runAction_ExitChangingStats() {
+		print("runAction_ExitChangingStats (SceneBase) " + name! + "\n")
+		
+		// change mode
+		levelMode = levelMode_ItemDetail
+		
+		// remove the changing stats popup
+		itemDetailPopupNode.removeAllChildren()
+		itemDetailPopupNode.removeFromParent()
+		
+		// exit item detail also
+		runAction_ExitItemDetail()
+	}
+	func runAction_UpdateMenuOverlayStats() {
+		print("runAction_UpdateMenuOverlayStats (SceneBase) " + name!)
+		
+		let l = (menuOverlayStatsNode.childNodeWithName(statusMoneyNodeName))!.childNodeWithName(statusMoneyBarLevelName)
+		//print(l)
+		
+		let newWidth = calcBarWidth(
+			width: statusBarLevelMaxWidth, 
+			total: moneyTotal, 
+			max: traitsDataOrigin[currentLevel]["max"] as! Int
+		)
+		
+		(l as! SKSpriteNode).size = CGSize(width: newWidth, height: (l?.frame.height)!)
+	}
     
     
+	
+	
+	////////////////////////////////////////
+	////////////////////////////////////////
+	////          Game Logic            ////
+	////////////////////////////////////////
+	////////////////////////////////////////
+	
+    /////////////////////////
+    //  item detail - buy  //
+    /////////////////////////
+    // will be called from children
+    func runLogic_AttemptBuyItem() {
+        print("runLogic_AttemptBuyItem (SceneBase) " + name!)
+        
+		// increase buy attempts for item
+        itemSelected.buyAttempts += 1
+        
+        // check if have money
+        if(moneyTotal >= itemSelected.detailCost) {
+            
+            // check if attempts is equal to min num of buys
+            if itemSelected.buyAttempts == itemSelected.buyMinAttempts {
+				
+				// yay!!! we can buy the item
+                runLogic_ActuallyBuyItem()
+                
+            } else {
+				// money, but not enough buy attempts
+				runAction_ShowBuyMessage()
+            }
+        } else {
+            // no money, create warning popup
+			runAction_ShowErrorMoney()
+        }
+    }
     
+    func runLogic_ActuallyBuyItem() {
+        print("runLogic_ActuallyBuyItem (SceneBase) " + name!)
+		
+		// logic things
+		moneyTotal -= itemSelected.detailCost		// decrease money - TODO animate this
+		itemSelected.buyAttempts = 0				// reset try counter
+		itemSelected.owns += 1						// add to item own count - this will count as inventory
+		
+		// go to stats changing popup
+		runAction_ShowChangingStats()
+    }
     
-    
-    ///////////////////////////////////////
-    //          Scene Changes            //
-    ///////////////////////////////////////
-    
-    func stateChangeNext() {
-        print("----------- stateChangeNext -----------")
+	
+	//////////////////
+	//  next level  //
+	//////////////////
+    func runLogic_NextLevel() {
+        print("----------- runLogic_NextLevel -----------")
         
         // create a transistion
         let transition = SKTransition.fadeWithDuration(0.5)
         
-        var error = false
-        
         let scene: SceneBase = {
+            switch currentLevel {
             
-            switch SceneBase.state {
+            // startScene game going to infancyScene
+            case currentLevel_Start:
+                print("going to SceneInfancy")
+				currentLevel = currentLevel_Infancy
+                return SceneInfancy()
                 
-                // start game going to infancy
-                case 0:
-                    return SceneInfancy()
+            // infancyScene going to childhoodScene
+            case currentLevel_Infancy:
+                print("going to SceneChildhood")
+				currentLevel = currentLevel_Childhood
+                return SceneChildhood()
                 
-                // infancy going to childhood
-                case 1:
-                    return SceneChildhood()
+            // childhoodScene going to adolescenceScene
+            case currentLevel_Childhood:
+                print("going to SceneAdolescence")
+				currentLevel = currentLevel_Adolescence
+                return SceneAdolescence()
                 
-                // childhood going to adolescence
-                case 2:
-                    return SceneAdolescence()
+            // adolescenceScene going to teensScene
+            case currentLevel_Adolescence:
+                print("going to SceneTeens")
+				currentLevel = currentLevel_Teens
+                return SceneTeens()
                 
-                // adolescence going to teens
-                case 3:
-                    return SceneTeens()
+            // teensScene going to collegeScene
+            case currentLevel_Teens:
+                print("going to SceneCollege")
+				currentLevel = currentLevel_College
+                return SceneCollege()
                 
-                // teens going to college
-                case 4:
-                    return SceneCollege()
+            // collegeScene going to adulthoodScene
+            case currentLevel_College:
+                print("going to SceneAdulthood")
+				currentLevel = currentLevel_Adulthood
+                return SceneAdulthood()
                 
-                // college going to adulthood
-                case 5:
-                    return SceneAdulthood()
-                
-                // adulthood going to end game
-                case 6:
-                    return SceneEnd()
-                
-                // defaulted to start again
-                default:
-                    error = true
-                    return SceneStart()
+            // adulthoodScene going to end gameScene
+            case currentLevel_Adulthood:
+                print("going to SceneEnd")
+				currentLevel = currentLevel_End
+                return SceneEnd()
+            
+            // defaulted to start again
+            default:
+                print("error - going to SceneInfancy")
+				currentLevel = currentLevel_Start
+                return SceneStart()
             }
         }()
-        
         
         // Configure the scene
         scene.scaleMode = .AspectFill
         scene.size = SceneBase.sceneSize
         
-        // Configure the scene
-        scene.scaleMode = .AspectFill
-        scene.size = size
-
-        
-        
         // go to that scene
         view!.presentScene(scene, transition: transition)
-        
-        // incrament state
-        if(error) {
-            SceneBase.state = 0
-        } else {
-            SceneBase.state += 1;
-        }
-        
     }
-    
-    
-    
-    
-    
-    
     
     
     func printAllNodes(node: SKNode) {
@@ -331,6 +597,4 @@ class SceneBase: SKScene {
             printAllNodes(child)
         }
     }
-    
-    
 }

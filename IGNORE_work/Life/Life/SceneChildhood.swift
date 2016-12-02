@@ -14,10 +14,9 @@ import SpriteKit
 
 class SceneChildhood: SceneBase {
     
-    
     override func didMoveToView(view: SKView) {
-        name = sceneNameChildhood
-        print(sceneNameChildhood + " - state 2")
+        name = levelNameChildhood
+        print(levelNameChildhood + " - state 2")
         
         /* Setup your scene here */
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")
@@ -34,33 +33,4 @@ class SceneChildhood: SceneBase {
         // test
         print(self.children)
     }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            let touchedNode = self.nodeAtPoint(location)
-            
-            //print("x: \(location.x)")
-            //print("y: \(location.y)")
-            
-            if let name = touchedNode.name
-            {
-                if name == "playButton"
-                {
-                    //print("Touched")
-                    stateChangeNext()
-                }
-            }
-        }
-    }
-    
-    override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
-    }
-    
-    
-    
-    
-    
-    
 }

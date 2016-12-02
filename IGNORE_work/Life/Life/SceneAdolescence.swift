@@ -6,14 +6,16 @@
 //  Copyright © 2016 Kode Studios. All rights reserved.
 //
 
+
 /* ******************************** */
 /*              STATE 3             */
 /* ******************************** */
 
+
 import SpriteKit
 
 class SceneAdolescence: SceneBase {
-
+    
     override func didMoveToView(view: SKView) {
         
         print("SceneAdolescence - state 3")
@@ -26,7 +28,6 @@ class SceneAdolescence: SceneBase {
         
         self.addChild(myLabel)
         
-        
         // add menu overlay
         //addMenuOverlay(self)
         
@@ -34,32 +35,5 @@ class SceneAdolescence: SceneBase {
         print(self.children)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
-        for touch in touches {
-            let location = touch.locationInNode(self)
-            let touchedNode = self.nodeAtPoint(location)
-            
-            //print("x: \(location.x)")
-            //print("y: \(location.y)")
-            
-            if let name = touchedNode.name
-            {
-                if name == "playButton"
-                {
-                    //print("Touched")
-                    stateChangeNext()
-                }
-            }
-        }
-    }
-    override func update(currentTime: CFTimeInterval) {
-        /* Called before each frame is rendered */
-    }
     
-    
-    
-    
-    
-
 }

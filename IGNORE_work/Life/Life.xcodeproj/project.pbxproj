@@ -22,9 +22,10 @@
 		0378E0231DCE773A00B15F19 /* SceneEnd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378E01E1DCE773A00B15F19 /* SceneEnd.swift */; };
 		0378E0241DCE773A00B15F19 /* SceneTeens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378E01F1DCE773A00B15F19 /* SceneTeens.swift */; };
 		0378E0261DCE8D3A00B15F19 /* SKHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378E0251DCE8D3A00B15F19 /* SKHelper.swift */; };
-		0378E0281DCEC34E00B15F19 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378E0271DCEC34E00B15F19 /* Items.swift */; };
-		0378E02B1DCECFF800B15F19 /* ItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378E02A1DCECFF800B15F19 /* ItemNode.swift */; };
+		0378E0281DCEC34E00B15F19 /* LoaderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378E0271DCEC34E00B15F19 /* LoaderHelper.swift */; };
 		0378E02D1DD0450200B15F19 /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378E02C1DD0450200B15F19 /* CustomScrollView.swift */; };
+		6C127D2D1DDFFDDD003FACC7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C127D2C1DDFFDDD003FACC7 /* Item.swift */; };
+		6C127D2F1DE4D293003FACC7 /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C127D2E1DE4D293003FACC7 /* DataHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,9 +46,10 @@
 		0378E01E1DCE773A00B15F19 /* SceneEnd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneEnd.swift; sourceTree = "<group>"; };
 		0378E01F1DCE773A00B15F19 /* SceneTeens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneTeens.swift; sourceTree = "<group>"; };
 		0378E0251DCE8D3A00B15F19 /* SKHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKHelper.swift; sourceTree = "<group>"; };
-		0378E0271DCEC34E00B15F19 /* Items.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
-		0378E02A1DCECFF800B15F19 /* ItemNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemNode.swift; sourceTree = "<group>"; };
+		0378E0271DCEC34E00B15F19 /* LoaderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderHelper.swift; sourceTree = "<group>"; };
 		0378E02C1DD0450200B15F19 /* CustomScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
+		6C127D2C1DDFFDDD003FACC7 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		6C127D2E1DE4D293003FACC7 /* DataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +91,8 @@
 				0378E00B1DCE6AAD00B15F19 /* LaunchScreen.storyboard */,
 				0378E00E1DCE6AAD00B15F19 /* Info.plist */,
 				0378E0251DCE8D3A00B15F19 /* SKHelper.swift */,
-				0378E0271DCEC34E00B15F19 /* Items.swift */,
+				0378E0271DCEC34E00B15F19 /* LoaderHelper.swift */,
+				6C127D2E1DE4D293003FACC7 /* DataHelper.swift */,
 			);
 			path = Life;
 			sourceTree = "<group>";
@@ -113,8 +116,8 @@
 		0378E0291DCECFDB00B15F19 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0378E02A1DCECFF800B15F19 /* ItemNode.swift */,
 				0378E02C1DD0450200B15F19 /* CustomScrollView.swift */,
+				6C127D2C1DDFFDDD003FACC7 /* Item.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -193,15 +196,16 @@
 				0378E0031DCE6AAD00B15F19 /* SceneInfancy.swift in Sources */,
 				0378E0211DCE773A00B15F19 /* SceneAdulthood.swift in Sources */,
 				0378E0051DCE6AAD00B15F19 /* GameViewController.swift in Sources */,
-				0378E02B1DCECFF800B15F19 /* ItemNode.swift in Sources */,
+				6C127D2D1DDFFDDD003FACC7 /* Item.swift in Sources */,
 				0378E0181DCE6F9A00B15F19 /* SceneStart.swift in Sources */,
 				0378DFFF1DCE6AAD00B15F19 /* AppDelegate.swift in Sources */,
 				0378E0161DCE6F2400B15F19 /* SceneChildhood.swift in Sources */,
-				0378E0281DCEC34E00B15F19 /* Items.swift in Sources */,
+				0378E0281DCEC34E00B15F19 /* LoaderHelper.swift in Sources */,
 				0378E0201DCE773A00B15F19 /* SceneAdolescence.swift in Sources */,
 				0378E0261DCE8D3A00B15F19 /* SKHelper.swift in Sources */,
 				0378E0241DCE773A00B15F19 /* SceneTeens.swift in Sources */,
 				0378E0221DCE773A00B15F19 /* SceneCollege.swift in Sources */,
+				6C127D2F1DE4D293003FACC7 /* DataHelper.swift in Sources */,
 				0378E0231DCE773A00B15F19 /* SceneEnd.swift in Sources */,
 				0378E01A1DCE71BE00B15F19 /* SceneBase.swift in Sources */,
 				0378E02D1DD0450200B15F19 /* CustomScrollView.swift in Sources */,
@@ -318,6 +322,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Life/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = KodeStudios.com.Life;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -329,6 +334,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Life/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = KodeStudios.com.Life;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -354,6 +360,7 @@
 				0378E0131DCE6AAD00B15F19 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

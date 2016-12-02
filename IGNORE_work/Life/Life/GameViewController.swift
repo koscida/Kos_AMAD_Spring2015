@@ -45,11 +45,22 @@ class GameViewController: UIViewController {
         // Sprite Kit applies additional optimizations to improve rendering performance
         skView.ignoresSiblingOrder = true
         
+
+        // create the items
+        loadOriginData()
+        
+        
+        //deleteLoadedItems()
+        //loadItemsFromDisk()
+        // resetData()
+
         
         // set the base scene properties
-        SceneBase.state = 0
         SceneBase.sceneScale = UIScreen.mainScreen().scale
-        SceneBase.sceneSize = CGSizeMake(skView.frame.size.width*SceneBase.sceneScale, skView.frame.size.height*SceneBase.sceneScale)
+        SceneBase.sceneSize = CGSizeMake(skView.frame.size.width*SceneBase.sceneScale,skView.frame.size.height*SceneBase.sceneScale)
+        width = SceneBase.sceneSize.width
+        height = SceneBase.sceneSize.height
+
         
         // get scene file
         // multiple options here for quick switching between stages
@@ -62,17 +73,14 @@ class GameViewController: UIViewController {
         
         // final present scene
         skView.presentScene(scene)
+ 
     }
-    
-    
-    
+ 
     func applicationWillResignActive(notification: NSNotification) {
     }
     
     func applicationDidBecomeActive(notification: NSNotification) {
-        
     }
-    
 
     override func shouldAutorotate() -> Bool {
         return true
@@ -87,14 +95,13 @@ class GameViewController: UIViewController {
         }
     }
 
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
 
-    
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
 }
