@@ -47,21 +47,28 @@ func loadLevelData() {
             // toys
             Item(
                 name: "plushie", resourceName: "",
-                detailName: "Plushie", detailDescription: "This is a stuffed animal.", detailCost: 10,
+                detailName: "Plushie", detailDescription: "This is a stuffed animal.", detailCost: 5,
                 tryMessages: ["Cute!"],
                 buyMinAttempts: 1, buyAttempts: 0, owns: 0,
                 traitValueChanges: [1, 1, 1, 1, 1, 1, 1, 1]
             ),
             Item(
                 name: "walker", resourceName: "",
-                detailName: "Walker", detailDescription: "Learn how to walk.", detailCost: 10,
+                detailName: "Walker", detailDescription: "Learn how to walk.", detailCost: 5,
                 tryMessages: ["Great idea!"],
                 buyMinAttempts: 1, buyAttempts: 0, owns: 0,
                 traitValueChanges: [1, 1, 1, 1, 1, 1, 1, 1]
             ),
             Item(
                 name: "donut", resourceName: "",
-                detailName: "Donut Thing", detailDescription: "Every baby had this thing.", detailCost: 10,
+                detailName: "Donut Thing", detailDescription: "Every baby had this thing.", detailCost: 5,
+                tryMessages: ["Fun!"],
+                buyMinAttempts: 1, buyAttempts: 0, owns: 0,
+                traitValueChanges: [1, 1, 1, 1, 1, 1, 1, 1]
+            ),
+            Item(
+                name: "keys", resourceName: "",
+                detailName: "Donut Thing", detailDescription: "Every baby had this thing.", detailCost: 5,
                 tryMessages: ["Fun!"],
                 buyMinAttempts: 1, buyAttempts: 0, owns: 0,
                 traitValueChanges: [1, 1, 1, 1, 1, 1, 1, 1]
@@ -70,27 +77,24 @@ func loadLevelData() {
             // clothes
             Item(
                 name: "onesie_superhero", resourceName: "",
-                detailName: "Superhero Onsie", detailDescription: "Onsie for a baby", detailCost: 10,
+                detailName: "\"Superhero\" Onsie", detailDescription: "Cute onsie for a baby!", detailCost: 10,
                 tryMessages: [
                     "What a cute onsie for a boy.  Why don't you pick out a different one for a girl?",
                     "You won't look cute in that, pick something else.",
                     "This onsie is for a boy.  Are you sure you want it?"
                 ],
-                buyMinAttempts: 2, buyAttempts: 0, owns: 0,
-                traitValueChanges: [1, 1, 1, 1, 1, 1, 1, 1]
+                buyMinAttempts: 4, buyAttempts: 0, owns: 0,
+                traitValueChanges: [1, 1, 1, 1]
             ),
             Item(
-                name: "onsie_future", resourceName: "",
-                detailName: "Future Trophy Wife Onsie", detailDescription: "Onsie for a baby", detailCost: 10,
+                name: "onsie_wife-future", resourceName: "infancy_wife-onsie",
+                detailName: "\"Future Trophy Wife\" Onsie", detailDescription: "Cute onsie for a baby!", detailCost: 10,
                 tryMessages: ["How funny!"],
                 buyMinAttempts: 1, buyAttempts: 0, owns: 0,
-                traitValueChanges: [1, 1, 1, 1, 1, 1, 1, 1]
+                traitValueChanges: [0, 1, 0, -1]
             )
         ]
     ]
-    
-    print("finished loading allItems")
-    print(allItems)
 }
 
 
@@ -155,31 +159,25 @@ let levelMode_Inventory_ItemDetail = 11
 //// ////////////////////////////////////// ////
 //// ////////////////////////////////////// ////
 
-let keyTraitReceptive       = 0
+/*let keyTraitReceptive       = 0
 let keyTraitEmpathy         = 1
 let keyTraitPatience        = 2
 let keyTraitNuturing        = 3
 let keyTraitIndependence    = 4
 let keyTraitLogic           = 5
 let keyTraitConfidence      = 6
-let keyTraitDisclipline     = 7
+let keyTraitDisclipline     = 7*/
+
+let keyTraitEmpathy         = 0
+let keyTraitNuturing        = 1
+let keyTraitLogic           = 2
+let keyTraitConfidence      = 3
+
 
 // this will change (value)
 var traitsDataOrigin = [
     [
-        "name": "Receptive",
-        "fem" : true,
-        "value" : 1,
-        "max" : 30
-    ],
-    [
         "name": "Empathy",
-        "fem" : true,
-        "value" : 1,
-        "max" : 30
-    ],
-    [
-        "name": "Patience",
         "fem" : true,
         "value" : 1,
         "max" : 30
@@ -192,12 +190,6 @@ var traitsDataOrigin = [
     ],
 
     [
-        "name": "Independence",
-        "fem" : false,
-        "value" : 1,
-        "max" : 30
-    ],
-    [
         "name": "Logic",
         "fem" : false,
         "value" : 1,
@@ -205,12 +197,6 @@ var traitsDataOrigin = [
     ],
     [
         "name": "Confidence",
-        "fem" : false,
-        "value" : 1,
-        "max" : 30
-    ],
-    [
-        "name": "Disclipline",
         "fem" : false,
         "value" : 1,
         "max" : 30
@@ -421,26 +407,32 @@ let menuInventoryButtonY: CGFloat = 0 + (menuInventoryButtonHeight/2) + menuPadd
 let menuInventoryButtonName = "inventoryBtn"
 
 
-let statusLabelHeight: CGFloat = (width * 0.02) + (menuPadding)
-let statusLabelWidth: CGFloat = statusLabelHeight
-let statusLabelY: CGFloat = height - menuPadding - (statusLabelHeight/2)
-
-let statusBarWidth: CGFloat = ((width - statusLabelWidth - menuPadding)/9) - menuPadding
-let statusBarHeight: CGFloat = statusBarWidth * 0.1
-let statusBarY = statusLabelY
-
-let statusBarLevelHeight: CGFloat = statusBarHeight - (statusBarPadding)
-let statusBarLevelMaxWidth: CGFloat = statusBarWidth - (statusBarPadding)
-let statusBarLevelY = statusLabelY
-
-let statusMoneyLabelX: CGFloat = menuPadding + (statusLabelWidth/2)
-let statusMoneyBarXLeft: CGFloat = statusMoneyLabelX + (statusLabelWidth/2)
-let statusMoneyBarX: CGFloat = statusMoneyBarXLeft + (statusBarWidth/2)
-let statusMoneyBarLevelXLeft: CGFloat = statusMoneyBarXLeft + (menuPadding/4)
-
 let statusMoneyNodeName = "statusMoneyNode"
-let statusMoneyBarLevelName = "statusMoneybarLevel"
+let statusMoneyLevelName = "statusMoneybarLevel"
 let statusTraitsNodeName = "statusTraitsNode"
+
+let statusPadding = menuPadding
+
+let statusMoneyLabelWidth = menuPadding * 2.5
+let statusMoneyLabelHeight = statusMoneyLabelWidth
+let statusMoneyLabelX = statusPadding + (statusMoneyLabelWidth/2)
+let statusMoneyLabelY = height - statusPadding - (statusMoneyLabelHeight/2)
+
+let statusMoneyBarHeight = statusMoneyLabelHeight - (1.5*statusPadding)
+let statusMoneyBarWidth = ((width - statusMoneyLabelWidth - statusPadding) / 9) - statusPadding
+let statusMoneyBarY = statusMoneyLabelY
+let statusMoneyBarX = statusPadding + statusMoneyLabelWidth + (statusMoneyBarWidth/2)
+let statusMoneyLevelHeight = statusMoneyBarHeight
+let statusMoneyLevelWidthMax = statusMoneyBarHeight
+let statusMoneyLevelY = statusMoneyLabelY
+let statusMoneyLevelXLeft = statusPadding + statusMoneyLabelWidth
+
+let statusTraitBarWidth = statusMoneyBarWidth
+let statusTraitBarHeight = statusMoneyBarHeight
+let statusTraitLevelHeight = statusTraitBarHeight
+let statusTraitLevelWidthMax = statusTraitBarWidth
+let statusTraitY = statusMoneyLabelY
+let statusTraitXLeftFirst = statusMoneyLevelXLeft + statusMoneyBarWidth + statusPadding
 
 
 let nextSceneButtonName = "nextSceneBtn"

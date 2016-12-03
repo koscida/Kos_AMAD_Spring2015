@@ -342,18 +342,24 @@ func createMoneyStats() -> SKNode {
     node.name = statusMoneyNodeName
     
     // dollar sign
-    let moneyLabelBack = createRect(name: "moneyStatus", widthExact: statusLabelWidth, heightExact: statusLabelHeight, xExact: statusMoneyLabelX, yExact: statusLabelY, fillColor: colorStatusMoneyLabelFill)
+    let moneyLabelBack = createRect(name: "moneyStatus", widthExact: statusMoneyLabelWidth, heightExact: statusMoneyLabelHeight, xExact: statusMoneyLabelX, yExact: statusMoneyLabelY, fillColor: colorStatusMoneyLabelFill)
     node.addChild(moneyLabelBack)
-    let moneyLabel = createLabelTextCentered(name: "moneyStatus", text: "$", x: statusMoneyLabelX, y: statusLabelY, textColor: colorStatusMoneyLabelText)
+    let moneyLabel = createLabelTextCentered(name: "moneyStatus", text: "$", x: statusMoneyLabelX, y: statusMoneyLabelY, textColor: colorStatusMoneyLabelText)
     node.addChild(moneyLabel)
     
     // bar back
-    let moneyBarBack = createStatusBarBack(name: "moneyStatus", x: statusMoneyBarX, y: statusBarY)
+    let moneyBarBack = createStatusBarBack(name: "moneyStatus", x: statusMoneyBarX, y: statusMoneyBarY)
     node.addChild(moneyBarBack)
     
     // bar level
-    let moneyBarLevelWidth = calcBarWidth(width: statusBarWidth, total: moneyTotal, max: moneyDataOrigin[currentLevel]["max"]! as Int)
-    let moneyBarLevel = createStatusBarLevel(name: statusMoneyBarLevelName, x: statusMoneyBarLevelXLeft + (moneyBarLevelWidth/2), y: statusBarY, width: moneyBarLevelWidth)
+    let currentMoneyBarLevelWidth = calcBarWidth(width: statusMoneyLevelWidthMax, total: moneyTotal, max: moneyDataOrigin[currentLevel]["max"]! as Int)
+    print("currentMoneyBarLevelWidth: " + String(currentMoneyBarLevelWidth))
+    let moneyBarLevel = createStatusBarLevel(
+        name: statusMoneyLevelName, 
+        x: statusMoneyLevelXLeft + (currentMoneyBarLevelWidth/2), 
+        y: statusMoneyLevelY, 
+        width: currentMoneyBarLevelWidth
+    )
     node.addChild(moneyBarLevel)
     
     return node
@@ -363,21 +369,21 @@ func createTraitsStats() -> SKNode {
     let node = SKNode()
     node.name = statusTraitsNodeName
     
-    var runningXLeft = statusMoneyBarX + (statusBarWidth/2) + (menuPadding)
+    var runningXLeft = statusTraitXLeftFirst
     var index = 0
     for trait in traitsDataOrigin {
         
         // bar back
-        let traitBarBack = createStatusBarBack(name: "traitStatus", x: runningXLeft + (statusBarWidth/2), y: statusBarY)
+        let traitBarBack = createStatusBarBack(name: "traitStatus", x: runningXLeft + (statusTraitBarWidth/2), y: statusTraitY)
         node.addChild(traitBarBack)
         
         // bar level
-        let traitWidth = calcBarWidth(width: statusBarLevelMaxWidth, total: trait["value"] as! Int, max: trait["max"] as! Int)
-        let traitBarLevel = createStatusBarLevel(name: trait["name"] as! String, x: runningXLeft + (statusBarPadding/2) + (traitWidth/2), y: statusBarY, width: traitWidth)
+        let currentTraitWidth = calcBarWidth(width: statusTraitLevelWidthMax, total: trait["value"] as! Int, max: trait["max"] as! Int)
+        let traitBarLevel = createStatusBarLevel(name: trait["name"] as! String, x: runningXLeft + (currentTraitWidth/2), y: statusTraitY, width: currentTraitWidth)
         node.addChild(traitBarLevel)
         
         // increase running X
-        runningXLeft += (statusBarWidth + (menuPadding))
+        runningXLeft += (statusTraitBarWidth + statusPadding)
         index += 1
     }
     
@@ -385,10 +391,10 @@ func createTraitsStats() -> SKNode {
 }
 
 func createStatusBarBack(name name: String, x: CGFloat, y: CGFloat) -> SKNode {
-    return createRect(name: name, widthExact: statusBarWidth, heightExact: statusBarHeight, xExact: x, yExact: y, fillColor:  colorStatusMoneyBarBack)
+    return createRect(name: name, widthExact: statusTraitBarWidth, heightExact: statusTraitBarHeight, xExact: x, yExact: y, fillColor:  colorStatusMoneyBarBack)
 }
 func createStatusBarLevel(name name: String, x: CGFloat, y: CGFloat, width: CGFloat) -> SKNode {
-    return createRect(name: name, widthExact: width, heightExact: statusBarLevelHeight, xExact: x, yExact: y, fillColor:  colorStatusMoneyBarLevel)
+    return createRect(name: name, widthExact: width, heightExact: statusTraitBarHeight, xExact: x, yExact: y, fillColor:  colorStatusMoneyBarLevel)
 }
 
 func createNextSceneButton() -> SKNode {
@@ -577,5 +583,8 @@ func centerTextLabelInRect(label label: SKLabelNode, rectX: CGFloat, rectY: CGFl
 }
 
 func calcBarWidth(width width: CGFloat, total: Int, max: Int) -> CGFloat {
-    return min(width * (CGFloat(total) / CGFloat(max)), CGFloat(max))
+    return min(
+        width * (CGFloat(total) / CGFloat(max)), 
+        CGFloat(width)
+    )
 }

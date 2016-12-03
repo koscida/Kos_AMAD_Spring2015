@@ -18,7 +18,7 @@ class GameViewController: UIViewController {
         // create notifications for application resign and active.  This will call those
         // functions (inside of this class) then the app is exited an started again.  This
         // persists throughout the app, no matter the scene
-        NSNotificationCenter.defaultCenter().addObserver(
+        /*NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(UIApplicationDelegate.applicationWillResignActive(_:)),
             name: UIApplicationWillResignActiveNotification,
@@ -29,7 +29,7 @@ class GameViewController: UIViewController {
             selector: #selector(UIApplicationDelegate.applicationDidBecomeActive(_:)),
             name: UIApplicationDidBecomeActiveNotification,
             object: UIApplication.sharedApplication())
-        
+*/
     }
     
     

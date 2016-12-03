@@ -220,7 +220,6 @@ class SceneBase: SKScene {
         // inventory
         menuOverlayNode.addChild(createInventoryButton())
         
-        
         // money
         let moneyNode = createMoneyStats()
         menuOverlayStatsNode.addChild(moneyNode)
@@ -228,14 +227,11 @@ class SceneBase: SKScene {
         // stats
         let traitsNode = createTraitsStats()
         menuOverlayStatsNode.addChild(traitsNode)
-        
         menuOverlayNode.addChild(menuOverlayStatsNode)
-        
         
         // next scene
         let nextSceneButton = createNextSceneButton()
         menuOverlayNode.addChild(nextSceneButton)
-        
         
         // add menu overlay
         self.addChild(menuOverlayNode)
@@ -452,11 +448,11 @@ class SceneBase: SKScene {
 	func runAction_UpdateMenuOverlayStats() {
 		print("runAction_UpdateMenuOverlayStats (SceneBase) " + name!)
 		
-		let l = (menuOverlayStatsNode.childNodeWithName(statusMoneyNodeName))!.childNodeWithName(statusMoneyBarLevelName)
+		let l = (menuOverlayStatsNode.childNodeWithName(statusMoneyNodeName))!.childNodeWithName(statusMoneyLevelName)
 		//print(l)
 		
 		let newWidth = calcBarWidth(
-			width: statusBarLevelMaxWidth, 
+			width: statusTraitLevelWidthMax, 
 			total: moneyTotal, 
 			max: traitsDataOrigin[currentLevel]["max"] as! Int
 		)
