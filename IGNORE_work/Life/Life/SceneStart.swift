@@ -16,7 +16,8 @@ class SceneStart: SceneBase {
 
     override func didMoveToView(view: SKView) {
         
-        print("SceneStart - state 0")
+		name = levelData[currentLevel].name
+        print(name! + " - state 0")
         
         createContent_Main()
         
@@ -51,18 +52,8 @@ class SceneStart: SceneBase {
     }
     
     override func createContent_Main() {
-        
-        let titleLabel1 = createLabelTitleCentered(name: "", text: "This is a game", x: widthMid, y: heightMid + 300, textColor: colorStartText)
-        self.addChild(titleLabel1)
-        
-        let titleLabel2 = createLabelTitleCentered(name: "", text: "about the game of life", x: widthMid, y: heightMid + 100, textColor: colorStartText)
-        self.addChild(titleLabel2)
-        
-        let titleLabel3 = createLabelTitleCentered(name: "", text: "for women", x: widthMid, y: heightMid - 100, textColor: colorStartText)
-        self.addChild(titleLabel3)
-        
-        let playButton = createPopupButtonGo(name: "playButton", text: "PLAY", x: widthMid, y: heightMid - 300)
-        self.addChild(playButton)
+		// TODO: - animate this
+		self.addChild(createSceneStart())
     }
     
 }

@@ -30,16 +30,16 @@ func saveItemsToDisk() {
             
             // Create file of own counts
             var ownCounts: [Int] = []
-            for itemCategory in allItems {
-                for item in itemCategory {
+            for level in levelData {
+                for item in level.items {
                     ownCounts.append(item.owns)
                 }
             }
             
             // create single array that contains money and trait values
-            var stats: [Int] = [moneyTotal]
+            var stats: [CGFloat] = [moneyTotal]
             for t in traitsDataOrigin {
-                stats.append(t["value"] as! Int)
+                stats.append(t.value)
             }
             
             
@@ -68,8 +68,8 @@ func loadItemsFromDisk() {
                 //print(ownCounts)
                 
                 var index = 0
-                for itemCategory in allItems {
-                    for item in itemCategory {
+                for level in levelData {
+                    for item in level.items {
                         item.owns = ownCounts[index]
                         index += 1
                     }
@@ -78,7 +78,7 @@ func loadItemsFromDisk() {
             
             // Load from Disk -- stats
             let loadedStats = NSArray(contentsOfURL: urlStats)
-            if var stats = loadedStats as? [Int] {
+            if var stats = loadedStats as? [CGFloat] {
                 //print(ownCounts)
                 
                 moneyTotal = stats[0]
@@ -86,7 +86,7 @@ func loadItemsFromDisk() {
                 stats.removeAtIndex(0)
                 var ind = 0
                 for stat in stats {
-                    traitsDataOrigin[ind]["value"] = stat
+                    traitsDataOrigin[ind].value = stat
                     ind += 1
                 }
             }

@@ -64,8 +64,8 @@ class GameViewController: UIViewController {
         
         // get scene file
         // multiple options here for quick switching between stages
-        //let scene = SceneStart()
-        let scene = SceneInfancy()
+        //let scene = SceneStart(); currentLevel = 0
+		let scene = SceneInfancy(); currentLevel = 1
         
         // Configure the scene
         scene.scaleMode = .AspectFill

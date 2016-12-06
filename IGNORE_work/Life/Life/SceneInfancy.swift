@@ -16,10 +16,14 @@ import SpriteKit
 class SceneInfancy: SceneBase {
     
     override func didMoveToView(view: SKView) {
+		
+		let background = SKSpriteNode(texture: SKTexture(imageNamed: "background_infancy"), size: CGSize(width: width, height: height))
+		background.position = CGPoint(x: widthMid, y: heightMid)
+		addChild(background)
+		
         super.didMoveToView(view)
-        //print("didMoveToView " + sceneNameInfancy)
         
-        name = levelNameInfancy
+        name = levelData[currentLevel].name
     }
     
     

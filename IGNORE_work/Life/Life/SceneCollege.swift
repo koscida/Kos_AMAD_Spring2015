@@ -16,7 +16,8 @@ class SceneCollege: SceneBase {
 
     override func didMoveToView(view: SKView) {
         
-        print("SceneCollege - state 5")
+		name = levelData[currentLevel].name
+        print(name! + " - state 5")
         
         /* Setup your scene here */
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")

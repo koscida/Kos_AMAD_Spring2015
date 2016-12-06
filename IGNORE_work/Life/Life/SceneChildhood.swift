@@ -15,8 +15,9 @@ import SpriteKit
 class SceneChildhood: SceneBase {
     
     override func didMoveToView(view: SKView) {
-        name = levelNameChildhood
-        print(levelNameChildhood + " - state 2")
+		
+        name = levelData[currentLevel].name
+        print(name! + " - state 2")
         
         /* Setup your scene here */
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")

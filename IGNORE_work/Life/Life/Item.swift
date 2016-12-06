@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+import SpriteKit
 
 class Item: NSObject, NSCoding {
     
@@ -18,7 +20,7 @@ class Item: NSObject, NSCoding {
     
     var detailName: String = ""
     var detailDescription: String = ""
-    var detailCost: Int = 0
+    var detailCost: CGFloat = 0
     
     var tryMessages: [String] = []
     
@@ -27,7 +29,7 @@ class Item: NSObject, NSCoding {
     
     var owns: Int = 0
     
-    var traitValueChanges: [Int] = []
+    var traitValueChanges: [CGFloat] = []
     
     
     
@@ -35,9 +37,7 @@ class Item: NSObject, NSCoding {
     
     init(itemDict: [String: AnyObject]) {
     
-    //init(name: String, resourceName: String, detailName: String, detailDescription: String, detailCost: Int, tryMessages: [String], buyMinAttempts: Int, buyAttempts: Int, owns: Int, traitValueChanges: [Int]) {
-        
-        super.init()
+		super.init()
         
         // Initialize stored properties.
         self.name = itemDict["name"] as! String
@@ -46,7 +46,7 @@ class Item: NSObject, NSCoding {
         
         self.detailName = itemDict["detailName"] as! String
         self.detailDescription = itemDict["detailDescription"] as! String
-        self.detailCost = itemDict["detailCost"] as! Int
+        self.detailCost = itemDict["detailCost"] as! CGFloat
         
         self.tryMessages = itemDict["tryMessages"] as! [String]
         
@@ -55,11 +55,11 @@ class Item: NSObject, NSCoding {
         
         self.owns = itemDict["owns"] as! Int
         
-        self.traitValueChanges = itemDict["traitValueChanges"] as! [Int]
+        self.traitValueChanges = itemDict["traitValueChanges"] as! [CGFloat]
         
     }
     
-    init(name: String, resourceName: String, detailName: String, detailDescription: String, detailCost: Int, tryMessages: [String], buyMinAttempts: Int, buyAttempts: Int, owns: Int, traitValueChanges: [Int]) {
+    init(name: String, resourceName: String, detailName: String, detailDescription: String, detailCost: CGFloat, tryMessages: [String], buyMinAttempts: Int, buyAttempts: Int, owns: Int, traitValueChanges: [CGFloat]) {
         
         super.init()
         
@@ -127,7 +127,7 @@ class Item: NSObject, NSCoding {
         
         aCoder.encodeObject(detailName, forKey: PropertyKey.detailNameKey)
         aCoder.encodeObject(detailDescription, forKey: PropertyKey.detailDescriptionKey)
-        aCoder.encodeInteger(detailCost, forKey: PropertyKey.detailCostKey)
+        aCoder.encodeObject(detailCost, forKey: PropertyKey.detailCostKey)
         
         aCoder.encodeObject(tryMessages, forKey: PropertyKey.tryMessagesKey)
         
@@ -146,7 +146,7 @@ class Item: NSObject, NSCoding {
         
         let detailName = aDecoder.decodeObjectForKey(PropertyKey.detailNameKey) as! String
         let detailDescription = aDecoder.decodeObjectForKey(PropertyKey.detailDescriptionKey) as! String
-        let detailCost = aDecoder.decodeObjectForKey(PropertyKey.detailCostKey) as! Int
+        let detailCost = aDecoder.decodeObjectForKey(PropertyKey.detailCostKey) as! CGFloat
         
         let tryMessages = aDecoder.decodeObjectForKey(PropertyKey.tryMessagesKey) as! [String]
         
@@ -155,7 +155,7 @@ class Item: NSObject, NSCoding {
         
         let owns = aDecoder.decodeObjectForKey(PropertyKey.ownsKey) as! Int
         
-        let traitValueChanges = aDecoder.decodeObjectForKey(PropertyKey.traitValueChangesKey) as! [Int]
+        let traitValueChanges = aDecoder.decodeObjectForKey(PropertyKey.traitValueChangesKey) as! [CGFloat]
         
         
         // Must call designated initializer.

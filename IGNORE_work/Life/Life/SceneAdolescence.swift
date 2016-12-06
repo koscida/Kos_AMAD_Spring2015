@@ -18,7 +18,8 @@ class SceneAdolescence: SceneBase {
     
     override func didMoveToView(view: SKView) {
         
-        print("SceneAdolescence - state 3")
+		name = levelData[currentLevel].name
+		print(name! + " - state 3")
         
         /* Setup your scene here */
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")

@@ -23,83 +23,169 @@ import SpriteKit
 var currentLevel = 0
 
 // this will change
-var allItems = [[Item]]()
+var levelData = [Level]()
 
-let currentLevel_Start			= -1
-let currentLevel_Infancy		= 0
-let currentLevel_Childhood		= 1
-let currentLevel_Adolescence	= 2
-let currentLevel_Teens			= 3
-let currentLevel_College		= 4
-let currentLevel_Adulthood		= 5
-let currentLevel_End			= 6
-
-let itemNameSuffix = "_Item"
+let currentLevel_Start			= 0
+let currentLevel_Infancy		= 1
+let currentLevel_Childhood		= 2
+let currentLevel_Adolescence	= 3
+let currentLevel_Teens			= 4
+let currentLevel_College		= 5
+let currentLevel_Adulthood		= 6
+let currentLevel_End			= 7
 
 func loadLevelData() {
     // LEVELS
-    allItems = [
-        
-        //////////////////////////////
-        //      infancy items       //
-        //////////////////////////////
-        [
-            // toys
-            Item(
-                name: "plushie", resourceName: "",
-                detailName: "Plushie", detailDescription: "This is a stuffed animal.", detailCost: 5,
-                tryMessages: ["Cute!"],
-                buyMinAttempts: 1, buyAttempts: 0, owns: 0,
-                traitValueChanges: [1, 1, 1, 1, 1, 1, 1, 1]
-            ),
-            Item(
-                name: "walker", resourceName: "",
-                detailName: "Walker", detailDescription: "Learn how to walk.", detailCost: 5,
-                tryMessages: ["Great idea!"],
-                buyMinAttempts: 1, buyAttempts: 0, owns: 0,
-                traitValueChanges: [1, 1, 1, 1, 1, 1, 1, 1]
-            ),
-            Item(
-                name: "donut", resourceName: "",
-                detailName: "Donut Thing", detailDescription: "Every baby had this thing.", detailCost: 5,
-                tryMessages: ["Fun!"],
-                buyMinAttempts: 1, buyAttempts: 0, owns: 0,
-                traitValueChanges: [1, 1, 1, 1, 1, 1, 1, 1]
-            ),
-            Item(
-                name: "keys", resourceName: "",
-                detailName: "Donut Thing", detailDescription: "Every baby had this thing.", detailCost: 5,
-                tryMessages: ["Fun!"],
-                buyMinAttempts: 1, buyAttempts: 0, owns: 0,
-                traitValueChanges: [1, 1, 1, 1, 1, 1, 1, 1]
-            ),
+    levelData = [
+		
+		Level(
+			name: "LevelStart",
+			moneyMax: 0, moneyAddValue: 30,
+			items:[]
+		),
+		
+		//////////////////////////////
+		//      infancy level       //
+		//////////////////////////////
+		Level(
+			name: "LevelInfancy",
+			moneyMax: 30, moneyAddValue: 00,
+			items:[
+				// toys
+				Item(
+					name: "plushie", resourceName: "infancy_plushie",
+					detailName: "Frog Plushie", detailDescription: "Soft and safe stuffed animal.", detailCost: 5,
+					tryMessages: ["Cute!"],
+					buyMinAttempts: 1, buyAttempts: 0, owns: 0,
+					traitValueChanges: [0, 1, 0, 0]
+				),
+				Item(
+					name: "walker", resourceName: "infancy_walker",
+					detailName: "Walker", detailDescription: "Learn how to walk.", detailCost: 5,
+					tryMessages: ["Great idea!"],
+					buyMinAttempts: 1, buyAttempts: 0, owns: 0,
+					traitValueChanges: [0, 0, 0, 1]
+				),
+				Item(
+					name: "donut", resourceName: "infancy_rings",
+					detailName: "Ring Toy", detailDescription: "Every baby had this thing.", detailCost: 5,
+					tryMessages: ["Fun!"],
+					buyMinAttempts: 1, buyAttempts: 0, owns: 0,
+					traitValueChanges: [1, 0, 1, 0]
+				),
+				Item(
+					name: "keys", resourceName: "infancy_keys",
+					detailName: "Keys", detailDescription: "For the teething months.", detailCost: 5,
+					tryMessages: ["Fun!"],
+					buyMinAttempts: 1, buyAttempts: 0, owns: 0,
+					traitValueChanges: [0, 1, 1, 0]
+				),
             
-            // clothes
-            Item(
-                name: "onesie_superhero", resourceName: "",
-                detailName: "\"Superhero\" Onsie", detailDescription: "Cute onsie for a baby!", detailCost: 10,
-                tryMessages: [
-                    "What a cute onsie for a boy.  Why don't you pick out a different one for a girl?",
-                    "You won't look cute in that, pick something else.",
-                    "This onsie is for a boy.  Are you sure you want it?"
-                ],
-                buyMinAttempts: 4, buyAttempts: 0, owns: 0,
-                traitValueChanges: [1, 1, 1, 1]
-            ),
-            Item(
-                name: "onsie_wife-future", resourceName: "infancy_wife-onsie",
-                detailName: "\"Future Trophy Wife\" Onsie", detailDescription: "Cute onsie for a baby!", detailCost: 10,
-                tryMessages: ["How funny!"],
-                buyMinAttempts: 1, buyAttempts: 0, owns: 0,
-                traitValueChanges: [0, 1, 0, -1]
-            )
-        ]
-    ]
+				// clothes
+				Item(
+					name: "onesie_superhero", resourceName: "infancy_onsie-future-superhero",
+					detailName: "\"Superhero\" Onsie", detailDescription: "Cute onsie for a baby!", detailCost: 10,
+					tryMessages: [
+						"Why don't you pick out a different one for a girl?",
+						"You won't look cute in that, why don't you pick something else?",
+						"This onsie is for a boy.  Are you sure you want it?"
+					],
+					buyMinAttempts: 4, buyAttempts: 0, owns: 0,
+					traitValueChanges: [1, 1, 1, 1]
+				),
+				Item(
+					name: "onsie_wife-future", resourceName: "infancy_onsie-future-wife",
+					detailName: "\"Future Trophy Wife\" Onsie", detailDescription: "Cute onsie for a baby!", detailCost: 10,
+					tryMessages: ["How funny!"],
+					buyMinAttempts: 1, buyAttempts: 0, owns: 0,
+					traitValueChanges: [0, 1, 0, -1]
+				)
+			] // end items array
+		),
+		Level(
+			name: "LevelChildhood",
+			moneyMax: 30, moneyAddValue: 30,
+			items:[
+				Item(
+					name: "plushie", resourceName: "infancy_plushie",
+					detailName: "Frog Plushie", detailDescription: "Soft and safe stuffed animal.", detailCost: 5,
+					tryMessages: ["Cute!"],
+					buyMinAttempts: 1, buyAttempts: 0, owns: 0,
+					traitValueChanges: [0, 1, 0, 0]
+				)
+			]
+		),
+		Level(
+			name: "LevelAdolescence",
+			moneyMax: 30, moneyAddValue: 30,
+			items:[
+				Item(
+					name: "plushie", resourceName: "infancy_plushie",
+					detailName: "Frog Plushie", detailDescription: "Soft and safe stuffed animal.", detailCost: 5,
+					tryMessages: ["Cute!"],
+					buyMinAttempts: 1, buyAttempts: 0, owns: 0,
+					traitValueChanges: [0, 1, 0, 0]
+				)
+			]
+		),
+		Level(
+			name: "LevelTeens",
+			moneyMax: 30, moneyAddValue: 30,
+			items:[
+				Item(
+					name: "plushie", resourceName: "infancy_plushie",
+					detailName: "Frog Plushie", detailDescription: "Soft and safe stuffed animal.", detailCost: 5,
+					tryMessages: ["Cute!"],
+					buyMinAttempts: 1, buyAttempts: 0, owns: 0,
+					traitValueChanges: [0, 1, 0, 0]
+				)
+			]
+		),
+		Level(
+			name: "LevelCollege",
+			moneyMax: 30, moneyAddValue: 30,
+			items:[
+				Item(
+					name: "plushie", resourceName: "infancy_plushie",
+					detailName: "Frog Plushie", detailDescription: "Soft and safe stuffed animal.", detailCost: 5,
+					tryMessages: ["Cute!"],
+					buyMinAttempts: 1, buyAttempts: 0, owns: 0,
+					traitValueChanges: [0, 1, 0, 0]
+				)
+			]
+		),
+		Level(
+			name: "LevelAdulthood",
+			moneyMax: 30, moneyAddValue: 30,
+			items:[
+				Item(
+					name: "plushie", resourceName: "infancy_plushie",
+					detailName: "Frog Plushie", detailDescription: "Soft and safe stuffed animal.", detailCost: 5,
+					tryMessages: ["Cute!"],
+					buyMinAttempts: 1, buyAttempts: 0, owns: 0,
+					traitValueChanges: [0, 1, 0, 0]
+				)
+			]
+		),
+		Level(
+			name: "LevelEnd",
+			moneyMax: 30, moneyAddValue: 30,
+			items:[
+				Item(
+					name: "plushie", resourceName: "infancy_plushie",
+					detailName: "Frog Plushie", detailDescription: "Soft and safe stuffed animal.", detailCost: 5,
+					tryMessages: ["Cute!"],
+					buyMinAttempts: 1, buyAttempts: 0, owns: 0,
+					traitValueChanges: [0, 1, 0, 0]
+				)
+			]
+		)
+	] // end levelData array
 }
 
 
 let levelNameBase           = "LevelBase"
-let levelNameStart          = "LevelStart"
+/*let levelNameStart          = "LevelStart"
 let levelNameInfancy        = "LevelInfancy"
 let levelNameChildhood      = "LevelChildhood"
 let levelNameAdolescence    = "LevelAdolescence"
@@ -116,7 +202,7 @@ let levelNames = [
     levelNameCollege,
     levelNameAdulthood,
     levelNameEnd
-]
+]*/
 
 let nameContentNode             = "ContentNode"
 let nameAnimationsNode          = "AnimationsNode"
@@ -175,33 +261,36 @@ let keyTraitConfidence      = 3
 
 
 // this will change (value)
-var traitsDataOrigin = [
-    [
-        "name": "Empathy",
-        "fem" : true,
-        "value" : 1,
-        "max" : 30
-    ],
-    [
-        "name": "Nuturing",
-        "fem" : true,
-        "value" : 1,
-        "max" : 30
-    ],
-
-    [
-        "name": "Logic",
-        "fem" : false,
-        "value" : 1,
-        "max" : 30
-    ],
-    [
-        "name": "Confidence",
-        "fem" : false,
-        "value" : 1,
-        "max" : 30
-    ]
-]
+var traitsDataOrigin = [Trait]()
+func loadTraitData() {
+	// LEVELS
+	traitsDataOrigin = [
+		Trait(
+			name	: "Empathy",
+			fem		: true,
+			value	: 0,
+			max		: 10
+		),
+		Trait(
+			name	: "Nuturing",
+			fem		: true,
+			value	: 0,
+			max		: 10
+		),
+		Trait(
+			name	: "Logic",
+			fem		: false,
+			value	: 0,
+			max		: 10
+		),
+		Trait(
+			name	: "Confidence",
+			fem		: false,
+			value	: 0,
+			max		: 10
+		)
+	]
+}
 
 
 
@@ -218,34 +307,8 @@ var traitsDataOrigin = [
 //// ////////////////////////////////////// ////
 
 // this will change
-var moneyTotal = 0
-
-var moneyDataOrigin = [
-    [
-        "max" : 30,
-        "levelAddValue" : 30
-    ],
-    [
-        "max" : 30,
-        "levelAddValue" : 30
-    ],
-    [
-        "max" : 30,
-        "levelAddValue" : 30
-    ],
-    [
-        "max" : 30,
-        "levelAddValue" : 30
-    ],
-    [
-        "max" : 30,
-        "levelAddValue" : 30
-    ],
-    [
-        "max" : 30,
-        "levelAddValue" : 30
-    ]
-]
+var moneyTotal: CGFloat = 0
+var moneyGoal: CGFloat = 0
 
 
 
@@ -259,10 +322,12 @@ var moneyDataOrigin = [
 //// ////////////////////////////////////////// ////
 func loadOriginData() {
     loadLevelData()
+	loadTraitData()
 }
 
 
 
+let alphaIncrament: CGFloat = 0.1
 
 
 
@@ -291,44 +356,68 @@ let colorGreyLight = UIColor(red: 174/255, green: 174/255, blue: 174/255, alpha:
 let colorGreyMedium = UIColor(red: 104/255, green: 104/255, blue: 104/255, alpha: 1.0)
 let colorGreyDark = UIColor(red: colorGreyDark_Red, green: colorGreyDark_Green, blue: colorGreyDark_Blue, alpha: 1.0)
 
-
-let colorStatusMoneyLabelText = UIColor.whiteColor()
-let colorStatusMoneyLabelFill = colorGreyMedium
-let colorStatusMoneyBarBack = UIColor.whiteColor()
-let colorStatusMoneyBarLevel = colorPink
+let colorBlack = UIColor.blackColor()
+let colorWhite = UIColor.whiteColor()
 
 
-let colorNextSceneFill = UIColor.whiteColor()
-let colorNextSceneText = colorPink
+//////////////////////////////
+//  item display scrolling
+let colorItemDisplayBack = colorGreyLight
 
 
+///////////////////
+// menu overlay
+let colorStatusBarBack = colorGreyDark
+
+let colorStatusMoneyText = colorWhite
+let colorStatusTraitBarBack = colorGreyLight
+let colorStatusTraitBarLevel = colorPurple
+
+let colorNextSceneFill = colorPink
+let colorNextSceneText = colorWhite
+
+
+
+//////////////////
+// item detail
 let colorPopupMute = UIColor(red: (colorGreyDark_Red), green: (colorGreyDark_Green), blue: (colorGreyDark_Blue), alpha: 0.6)
 let colorPopupBack = colorGreyLight
+let colorPopupText = colorWhite
 
 let colorPopupBackWarning = colorGreyMedium
 
 let colorPopupButtonSmallFillBright = colorPink
-let colorPopupButtonSmallTextBright = UIColor.whiteColor()
+let colorPopupButtonSmallTextBright = colorWhite
 let colorPopupButtonSmallFillMuted = colorGreyMedium
-let colorPopupButtonSmallTextMuted = UIColor.blackColor()
+let colorPopupButtonSmallTextMuted = colorBlack
 
-let colorPopupButtonGoFill = colorPink
-let colorPopupButtonGoText = UIColor.whiteColor()
+let colorPopupButtonBigFill = colorPink
+let colorPopupButtonBigText = colorWhite
+
+let colorChangingStatsTraitBarBack = colorWhite
+let colorChangingStatsTraitBarLevel = colorStatusTraitBarLevel
+
+
+
+/////////////////
+// inventory
+let colorInventoryButtonFill = colorPink
+let colorInventoryButtonText = colorWhite
 
 let colorInventoryButtonExitFill = colorGreyMedium
-let colorInventoryButtonExitText = UIColor.blackColor()
+let colorInventoryButtonExitText = colorBlack
 
-let colorInventoryTitle = UIColor.blackColor()
+let colorInventoryTitle = colorBlack
 
 let colorInventoryTabBack = colorGreyMedium
-let colorInventoryTabText = UIColor.blackColor()
+let colorInventoryTabText = colorBlack
 
 let colorInventoryDisplayContainerBack = colorGreyMedium
 let colorInventoryCardBack = colorGreyDark
-let colorInventoryCardTitle = UIColor.blackColor()
+let colorInventoryCardTitle = colorWhite
 
 
-let colorStartText = UIColor.whiteColor()
+let colorStartText = colorWhite
 
 
 
@@ -353,108 +442,276 @@ var height: CGFloat = 0
 let widthMid = width/2
 let heightMid = height/2
 
+let fontTitle = "MarkerFelt-Wide"
+let fontText = "Helvetica"
+
+
+/////////////////////
+//		Items
+let itemPadding: CGFloat = 40
+
+let itemDisplayContainerNode = "itemDisplayContainerNode"
+
+let itemDisplayXIncrament: CGFloat = (150)
+
+let itemDisplayNameSuffix = "_itemDisplay"
+let itemDisplayWidth: CGFloat = 800
+let itemDisplayHeight: CGFloat = 800
+let itemDisplayY = heightMid
+
+let itemDisplayImageWidth = itemDisplayWidth - (itemPadding*2)
+let itemDisplayImageHeight = itemDisplayHeight - (itemPadding*2)
+let itemDisplayImageY = itemDisplayY
+let itemDisplayXOffset = (itemDisplayImageWidth/2) + itemPadding
+
+
+
+
+//////////////////////////
+//		Generic Popup	//
+let popupPadding: CGFloat = 20
 
 let popupWidthFraction: CGFloat = 0.8
 let popupHeightFraction: CGFloat = 0.8
 let popupWidth: CGFloat = popupWidthFraction * width
 let popupHeight: CGFloat = popupHeightFraction * height
-let popupLeftX: CGFloat = widthMid - (popupWidth / 2)
-let popupRightX = popupLeftX + popupWidth
-let popupBottomY: CGFloat = heightMid - (popupHeight / 2)
-let popupTopY = popupButtonY + popupHeight
+let popupX = widthMid
+let popupXLeft = popupX - (popupWidth / 2)
+let popupXRight = popupX + (popupWidth / 2)
+let popupY = heightMid
+let popupYBottom = popupY - (popupHeight / 2)
+let popupYTop = popupY + (popupHeight / 2)
 
-let popupWarningDiffHor = popupWidth * 0.2
-let popupWarningDiffVer = popupHeight * 0.2
-let popupWarningWidth = popupWidth - popupWarningDiffHor
-let popupWarningHeight = popupHeight - popupWarningDiffVer
-let popupWarningLeftX = popupLeftX + (popupWarningDiffHor / 2)
-let popupWarningRightX = popupRightX - (popupWarningDiffHor / 2)
-let popupWarningBottomY = popupBottomY + (popupWarningDiffVer / 2)
-let popupWarningTopY = popupTopY - (popupWarningDiffVer / 2)
+let popupButtonSmallWidth: CGFloat = 300
+let popupButtonSmallHeight: CGFloat = 150
+let popupButtonBigWidth: CGFloat = 500
+let popupButtonBigHeight: CGFloat = 200
 
-
-let popupPadding: CGFloat = 20
-
-let popupButtonWidth: CGFloat = 300
-let popupButtonHeight: CGFloat = 150
-let popupButtonLeftX: CGFloat = popupLeftX + popupPadding
-let popupButtonRightX: CGFloat = popupLeftX + popupWidth - popupPadding - popupButtonWidth
-let popupButtonY: CGFloat = popupBottomY + popupPadding
-
-let popupButtonCancel			= "cancelBtn"
-let popupButtonConfirm			= "confirmBtn"
-let popupButtonBuyMessageOk		= "buyMessageBtn"
-let popupButtonErrorOk			= "errorBtn"
-let popupButtonStatsChangingOk	= "statsOkBtn"
+let popupTextTitleHeight: CGFloat = popupPadding * 6
+let popupTextRegularHeight: CGFloat = popupTextTitleHeight * 0.5
 
 
-let popupButtonGoWidth: CGFloat = 500
-let popupButtonGoHeight: CGFloat = 200
 
-let popupButtonWarningWidth: CGFloat = 500
-let popupButtonWarningHeight: CGFloat = 200
-let popupButtonWarningX = widthMid
-let popupButtonWarningY = popupWarningBottomY + (popupButtonWarningHeight / 2) + popupPadding
+//////////////////////////
+//		Item Detail		//
+let itemDetailPadding = popupPadding * 2
 
+let itemDetailWidth = popupWidth
+let itemDetailHeight = popupHeight
+let itemDetailX = popupX
+let itemDetailY = popupY
+
+
+let itemDetailButtonCancel = "cancelBtn"
+let itemDetailButtonConfirm = "confirmBtn"
+let itemDetailButtonWidth = popupButtonSmallWidth
+let itemDetailButtonHeight = popupButtonSmallHeight
+let itemDetailLeftButtonX = popupXLeft + itemDetailPadding + (itemDetailButtonWidth/2)
+let itemDetailRightButtonX = popupXRight - itemDetailPadding - (itemDetailButtonWidth/2)
+let itemDetailButtonY = popupYBottom + itemDetailPadding + (itemDetailButtonHeight/2)
+
+
+let itemDetailImageHeight = popupHeight - (3*itemDetailPadding) - itemDetailButtonHeight
+let itemDetailImageWidth = itemDetailImageHeight
+let itemDetailImageX = popupXLeft + itemDetailPadding + (itemDetailImageWidth/2)
+let itemDetailImageY = popupYTop - itemDetailPadding - (itemDetailImageHeight/2)
+
+let itemDetailTitleWidth = popupWidth - (3*itemDetailPadding) - itemDetailImageWidth
+let itemDetailTitleHeight = popupTextTitleHeight
+let itemDetailTitleX = popupXRight - itemDetailPadding - (itemDetailTitleWidth/2)
+let itemDetailTitleXLeft = itemDetailTitleX - (itemDetailTitleWidth/2)
+let itemDetailTitleY = popupYTop - itemDetailPadding - (itemDetailTitleHeight/2)
+
+let itemDetailDescWidth = itemDetailTitleWidth
+let itemDetailDescHeight = popupTextRegularHeight
+let itemDetailDescX = itemDetailTitleX
+let itemDetailDescXLeft = itemDetailTitleXLeft
+let itemDetailDescY = itemDetailTitleY - (itemDetailTitleHeight/2) - itemDetailPadding - (itemDetailDescHeight/2)
+
+let itemDetailCostWidth = (itemDetailTitleWidth/2) - popupPadding
+let itemDetailCostHeight = popupTextRegularHeight
+let itemDetailCostXLeft = itemDetailTitleXLeft
+let itemDetailCostX = itemDetailCostXLeft + (itemDetailCostWidth/2)
+let itemDetailCostY = itemDetailDescY - (itemDetailDescHeight/2) - itemDetailPadding - (itemDetailCostHeight/2)
+
+
+
+//////////////////////////////
+//		Changing Stats		//
+let changingStatsPadding = popupPadding * 2
+
+let changingStatsWidth = popupWidth * 1.1
+let changingStatsHeight = popupHeight * 1.1
+let changingStatsX = popupX
+let changingStatsXLeft = changingStatsX - (changingStatsWidth / 2)
+let changingStatsXRight = changingStatsX + (changingStatsWidth / 2)
+let changingStatsY = popupY
+let changingStatsYTop = changingStatsY + (changingStatsHeight / 2)
+let changingStatsYBottom = changingStatsY - (changingStatsHeight / 2)
+
+
+let changingStatsMoneyDecrement: CGFloat = 0.5
+let changingStatsTraitIncrement: CGFloat = 0.1
+let changingStatsDurationSec: CGFloat = 2
+let changingStatsFPS: CGFloat = 5
+let changingStatsTotalFrames = changingStatsDurationSec * changingStatsFPS
+
+let changingStatsMoneyNodeName = "changingMoneyNode"
+let changingStatsMoneyWidth = changingStatsWidth
+let changingStatsMoneyHeight = popupTextTitleHeight
+let changingStatsMoneyX = changingStatsX
+let changingStatsMoneyY = popupYTop - changingStatsPadding - (changingStatsMoneyHeight/2)
+
+let changingStatsTraitSuffix = "_changingTraitNode"
+let changingStatsTraitWidth = changingStatsWidth * 0.5
+let changingStatsTraitHeight = (changingStatsHeight - 
+		changingStatsPadding - changingStatsMoneyHeight - changingStatsPadding - 
+		changingStatsPadding - popupButtonBigHeight - changingStatsPadding - 
+		(changingStatsPadding * 4)
+	) / 4
+let changingStatsTraitX = changingStatsX
+let changingStatsTraitXLeft = changingStatsTraitX - (changingStatsTraitWidth/2)
+let changingStatsTraitFirstY = changingStatsYTop - changingStatsPadding - changingStatsMoneyHeight - changingStatsPadding - (changingStatsTraitHeight/2) - changingStatsPadding
+
+let changingStatsButtonOk = "statsOkBtn"
+let changingStatsButtonWidth = popupButtonBigWidth
+let changingStatsButtonHeight = popupButtonBigHeight
+let changingStatsButtonX = changingStatsX
+let changingStatsButtonY = changingStatsYBottom + (changingStatsButtonHeight / 2) + changingStatsPadding
+
+
+
+//////////////////////////
+//			Error		//
+let errorPadding = popupPadding 
+
+let errorWidth = popupWidth * 0.9
+let errorHeight = popupHeight * 0.9
+let errorX = popupX
+let errorXLeft = errorX - (errorWidth / 2)
+let errorXRight = errorX + (errorWidth / 2)
+let errorY = popupY
+let errorYTop = errorY + (errorHeight / 2)
+let errorYBottom = errorY - (errorHeight / 2)
+
+let errorMessageWidth = errorWidth * 0.75
+let errorMessageHeight = popupTextRegularHeight
+let errorMessageX = errorX
+let errorMessageY = errorYTop - (errorHeight - errorButtonHeight - errorPadding)/2
+
+
+let errorButtonOk = "errorBtn"
+let errorButtonWidth = popupButtonBigWidth
+let errorButtonHeight = popupButtonBigHeight
+let errorButtonX = errorX
+let errorButtonY = errorYBottom + (errorButtonHeight / 2) + (errorPadding*2)
+
+
+
+//////////////////////////////////////
+//			Buy Confirmation		//
+let buyConfirmPadding = popupPadding * 2
+
+let buyConfirmWidth = popupWidth * 1.1
+let buyConfirmHeight = popupHeight * 1.1
+let buyConfirmX = popupX
+let buyConfirmXLeft = buyConfirmX - (buyConfirmWidth / 2)
+let buyConfirmXRight = buyConfirmX + (buyConfirmWidth / 2)
+let buyConfirmY = popupY
+let buyConfirmYTop = buyConfirmY + (buyConfirmHeight / 2)
+let buyConfirmYBottom = buyConfirmY - (buyConfirmHeight / 2)
+
+let buyConfirmMessageOk = "buyMessageBtn"
+let buyConfirmButtonWidth = popupButtonBigWidth
+let buyConfirmButtonHeight = popupButtonBigHeight
+let buyConfirmButtonX = buyConfirmX
+let buyConfirmButtonY = buyConfirmYBottom + (buyConfirmButtonHeight / 2) + buyConfirmPadding
+
+let buyConfirmLabelWidth = buyConfirmWidth - (buyConfirmPadding*2)
+let buyConfirmLabelHeight = buyConfirmHeight - buyConfirmButtonHeight - (buyConfirmPadding*3)
+let buyConfirmLabelX = buyConfirmX
+let buyConfirmLabelY = buyConfirmYTop - buyConfirmPadding - (buyConfirmLabelHeight/2)
+
+
+
+//////////////////////////////////
+//			Inventory Menu		//
 
 let menuPadding: CGFloat = 20
-let statusBarPadding: CGFloat = 10
 
-let menuInventoryButtonWidth: CGFloat = 200
-let menuInventoryButtonHeight: CGFloat = 200
+let menuInventoryButtonName = "inventoryBtn"
+let menuInventoryButtonWidth: CGFloat = 300
+let menuInventoryButtonHeight: CGFloat = 100
 let menuInventoryButtonX: CGFloat = width - (menuInventoryButtonWidth/2) - menuPadding
 let menuInventoryButtonY: CGFloat = 0 + (menuInventoryButtonHeight/2) + menuPadding
-let menuInventoryButtonName = "inventoryBtn"
-
-
-let statusMoneyNodeName = "statusMoneyNode"
-let statusMoneyLevelName = "statusMoneybarLevel"
-let statusTraitsNodeName = "statusTraitsNode"
-
-let statusPadding = menuPadding
-
-let statusMoneyLabelWidth = menuPadding * 2.5
-let statusMoneyLabelHeight = statusMoneyLabelWidth
-let statusMoneyLabelX = statusPadding + (statusMoneyLabelWidth/2)
-let statusMoneyLabelY = height - statusPadding - (statusMoneyLabelHeight/2)
-
-let statusMoneyBarHeight = statusMoneyLabelHeight - (1.5*statusPadding)
-let statusMoneyBarWidth = ((width - statusMoneyLabelWidth - statusPadding) / 9) - statusPadding
-let statusMoneyBarY = statusMoneyLabelY
-let statusMoneyBarX = statusPadding + statusMoneyLabelWidth + (statusMoneyBarWidth/2)
-let statusMoneyLevelHeight = statusMoneyBarHeight
-let statusMoneyLevelWidthMax = statusMoneyBarHeight
-let statusMoneyLevelY = statusMoneyLabelY
-let statusMoneyLevelXLeft = statusPadding + statusMoneyLabelWidth
-
-let statusTraitBarWidth = statusMoneyBarWidth
-let statusTraitBarHeight = statusMoneyBarHeight
-let statusTraitLevelHeight = statusTraitBarHeight
-let statusTraitLevelWidthMax = statusTraitBarWidth
-let statusTraitY = statusMoneyLabelY
-let statusTraitXLeftFirst = statusMoneyLevelXLeft + statusMoneyBarWidth + statusPadding
-
+let menuInventoryButtonLabelWidth = menuInventoryButtonWidth - (menuPadding*2)
+let menuInventoryButtonLabelHeight = menuInventoryButtonHeight - (menuPadding*2)
 
 let nextSceneButtonName = "nextSceneBtn"
-let nextSceneButtonHeight = menuInventoryButtonHeight * 0.5
-let nextSceneButtonWidth = nextSceneButtonHeight * 2.5
+let nextSceneButtonHeight = menuInventoryButtonHeight
+let nextSceneButtonWidth = menuInventoryButtonWidth
 let nextSceneButtonX = menuPadding + (nextSceneButtonWidth/2)
 let nextSceneButtonY = menuPadding + (nextSceneButtonHeight/2)
+let nextSceneButtonTextHeight = nextSceneButtonHeight - (menuPadding*2)
+let nextSceneButtonTextWidth = nextSceneButtonWidth - (menuPadding*2)
 
 
-let exitButtonWidth: CGFloat = 100
-let exitButtonHeight: CGFloat = 100
+
+let statusPadding = menuPadding*1.5
+
+let statusBarBackWidth = width
+let statusBarBackHeight: CGFloat = 100
+let statusBarBackX = widthMid
+let statusBarBackY = height - (statusBarBackHeight/2)
+
+let statusMoneyNodeName = "statusMoneyNode"
+let statusMoneyWidth = width * (1/5)
+let statusMoneyHeight = statusBarBackHeight - (statusPadding*2)
+let statusMoneyXLeft = statusPadding
+let statusMoneyY = height - statusPadding - (statusMoneyHeight/2)
+
+let statusTraitsNodeName = "statusTraitsNode"
+let statusTraitBarWidth = ((width - statusPadding) / 10) - statusPadding
+let statusTraitBarHeight = statusBarBackHeight - (statusPadding*2)
+let statusTraitLevelHeight = statusTraitBarHeight
+let statusTraitLevelWidthMax = statusTraitBarWidth
+let statusTraitY = height - (statusPadding*1) - (statusTraitBarHeight/2)
+let statusTraitLeftX = width - statusPadding - statusTraitBarWidth
+let statusTrait1XLeft = statusTraitLeftX
+let statusTrait2XLeft = statusTrait1XLeft - statusTraitBarWidth - statusPadding
+let statusTrait3XLeft = statusTrait2XLeft - statusTraitBarWidth - statusPadding
+let statusTrait4XLeft = statusTrait3XLeft - statusTraitBarWidth - statusPadding
+
+let statusTraitNameSuffix = "_level"
+
+
 
 let inventoryPadding: CGFloat = 40
 
-let inventoryExitButtonName = "inventoryExitBtn"
+let inventoryBackWidth = width
+let inventoryBackHeight = height
+let inventoryBackX = widthMid
+let inventoryBackY = heightMid
 
-let inventoryHeaderMenuHeight = inventoryPadding + exitButtonHeight + inventoryPadding
+
+let inventoryHeaderMenuHeight = inventoryPadding + exitButtonHeight + inventoryPadding // all the padding
+
+let inventoryExitButtonName = "inventoryExitBtn"
+let exitButtonWidth: CGFloat = 100
+let exitButtonHeight: CGFloat = 100
+let inventoryButtonExitX = width - (exitButtonWidth/2) - inventoryPadding
+let inventoryButtonExitY = height - (exitButtonHeight/2) - inventoryPadding
+
+let inventoryTitleHeight = exitButtonHeight
+let inventoryTitleXLeft = inventoryPadding
+let inventoryTitleY = inventoryBackHeight - inventoryPadding 
+
 
 let inventoryTabHeight: CGFloat = 100
 let inventoryTabWidth: CGFloat = 300
-let inventoryTabMenuHeight = inventoryPadding + inventoryTabHeight
-let inventoryTabMenuY = height - inventoryHeaderMenuHeight - inventoryTabMenuHeight
+let inventoryTabMenuHeight = inventoryTabHeight // no padding
+let inventoryTabMenuX = inventoryPadding + (inventoryTabWidth/2)
+let inventoryTabMenuY = inventoryBackHeight - inventoryHeaderMenuHeight - (inventoryTabMenuHeight/2)
 let inventoryTabNameSuffix = "TabBtn"
 let inventoryTabMasName = "Other"
 let inventoryTabNameAll = "tabAllBtn"
@@ -463,14 +720,40 @@ let inventoryDisplayContainerWidth = width
 let inventoryDisplayContainerHeight = height - (inventoryHeaderMenuHeight + inventoryTabMenuHeight)
 let inventoryDisplayContainerY = (inventoryDisplayContainerHeight/2)
 
+let inventoryCardName = "ItemCard"
 let inventoryCardHeight = inventoryDisplayContainerHeight * 0.9
 let inventoryCardWidth = inventoryCardHeight * 0.6
 let inventoryCardTop = inventoryDisplayContainerHeight * 0.95
 let inventoryCardY = inventoryCardTop - (inventoryCardHeight/2)
 
-let inventoryCardName = "ItemCard"
-let inventoryPopupExitButtonName = "inventoryPopupExitBtn"
+let inventoryCardImageWidth = inventoryCardWidth - (inventoryPadding*2)
+let inventoryCardImageHeight = inventoryCardImageWidth
+let inventoryCardImageXOffset = (inventoryCardImageWidth/2) + inventoryPadding
+let inventoryCardImageY = inventoryCardTop - inventoryPadding - (inventoryCardImageHeight/2)
 
-let inventoryButtonExitX = width - exitButtonWidth - inventoryPadding
-let inventoryButtonExitY = height - exitButtonHeight - inventoryPadding
+let inventoryCardTitleWidth = inventoryCardWidth - (inventoryPadding*2)
+let inventoryCardTitleHeight = popupTextTitleHeight
+let inventoryCardTitleY = inventoryCardImageY - (inventoryCardImageHeight/2) - inventoryPadding - (inventoryCardTitleHeight/2)
+
+let inventoryCardOwnsWidth = (inventoryCardWidth - (inventoryPadding*2))/2
+let inventoryCardOwnsHeight = popupTextRegularHeight
+let inventoryCardOwnsY = inventoryCardTitleY - (inventoryCardTitleHeight/2) - inventoryPadding - (inventoryCardOwnsHeight/2)
+
+
+let inventoryItemDetailPadding = inventoryPadding
+
+let inventoryItemDetailWidth = popupWidth
+let inventoryItemDetailHeight = popupHeight
+let inventoryItemDetailX = popupX
+let inventoryItemDetailXLeft = popupX - (inventoryItemDetailWidth/2)
+let inventoryItemDetailXRight = popupX + (inventoryItemDetailWidth/2)
+let inventoryItemDetailY = popupY
+let inventoryItemDetailYTop = popupY + (inventoryItemDetailHeight/2)
+let inventoryItemDetailYButton = popupY - (inventoryItemDetailHeight/2)
+
+let inventoryItemDetailExitButtonName = "inventoryPopupExitBtn"
+let inventoryItemDetailExitButtonX = inventoryItemDetailXRight - inventoryItemDetailPadding - (exitButtonWidth/2)
+let inventoryItemDetailExitButtonY = inventoryItemDetailYTop - inventoryItemDetailPadding - (exitButtonHeight/2)
+
+
 

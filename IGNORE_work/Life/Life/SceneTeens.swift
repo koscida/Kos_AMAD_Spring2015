@@ -15,8 +15,13 @@ import SpriteKit
 class SceneTeens: SceneBase {
 
     override func didMoveToView(view: SKView) {
+		
+		let background = SKSpriteNode(texture: SKTexture(imageNamed: "background_infancy"), size: CGSize(width: width, height: height))
+		background.position = CGPoint(x: widthMid, y: heightMid)
+		addChild(background)
         
-        print("SceneTeens - state 4")
+		name = levelData[currentLevel].name
+		print(name! + " - state 4")
         
         /* Setup your scene here */
         let myLabel = SKLabelNode(fontNamed:"Chalkduster")
