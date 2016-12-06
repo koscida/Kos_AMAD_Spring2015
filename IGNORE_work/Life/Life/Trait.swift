@@ -18,6 +18,7 @@ class Trait {
 	var fem: Bool = false
 	var value: CGFloat = 0
 	var valueGoal: CGFloat = 0
+	var valueTmp: CGFloat = 0
 	var max: CGFloat = 0
 	
 	

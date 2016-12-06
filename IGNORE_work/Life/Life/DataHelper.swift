@@ -49,7 +49,7 @@ func loadLevelData() {
 		//////////////////////////////
 		Level(
 			name: "LevelInfancy",
-			moneyMax: 30, moneyAddValue: 00,
+			moneyMax: 30, moneyAddValue: 30,
 			items:[
 				// toys
 				Item(
@@ -309,6 +309,7 @@ func loadTraitData() {
 // this will change
 var moneyTotal: CGFloat = 0
 var moneyGoal: CGFloat = 0
+var moneyTmp: CGFloat = 0
 
 
 
@@ -473,8 +474,8 @@ let popupPadding: CGFloat = 20
 
 let popupWidthFraction: CGFloat = 0.8
 let popupHeightFraction: CGFloat = 0.8
-let popupWidth: CGFloat = popupWidthFraction * width
-let popupHeight: CGFloat = popupHeightFraction * height
+let popupWidth = popupWidthFraction * width
+let popupHeight = popupHeightFraction * height
 let popupX = widthMid
 let popupXLeft = popupX - (popupWidth / 2)
 let popupXRight = popupX + (popupWidth / 2)
@@ -487,8 +488,8 @@ let popupButtonSmallHeight: CGFloat = 150
 let popupButtonBigWidth: CGFloat = 500
 let popupButtonBigHeight: CGFloat = 200
 
-let popupTextTitleHeight: CGFloat = popupPadding * 6
-let popupTextRegularHeight: CGFloat = popupTextTitleHeight * 0.5
+let popupTextTitleHeight = popupPadding * 6
+let popupTextRegularHeight = popupTextTitleHeight * 0.5
 
 
 
@@ -642,15 +643,15 @@ let menuPadding: CGFloat = 20
 let menuInventoryButtonName = "inventoryBtn"
 let menuInventoryButtonWidth: CGFloat = 300
 let menuInventoryButtonHeight: CGFloat = 100
-let menuInventoryButtonX: CGFloat = width - (menuInventoryButtonWidth/2) - menuPadding
-let menuInventoryButtonY: CGFloat = 0 + (menuInventoryButtonHeight/2) + menuPadding
+let menuInventoryButtonX = menuPadding + (nextSceneButtonWidth/2)
+let menuInventoryButtonY = 0 + (menuInventoryButtonHeight/2) + menuPadding
 let menuInventoryButtonLabelWidth = menuInventoryButtonWidth - (menuPadding*2)
 let menuInventoryButtonLabelHeight = menuInventoryButtonHeight - (menuPadding*2)
 
 let nextSceneButtonName = "nextSceneBtn"
 let nextSceneButtonHeight = menuInventoryButtonHeight
 let nextSceneButtonWidth = menuInventoryButtonWidth
-let nextSceneButtonX = menuPadding + (nextSceneButtonWidth/2)
+let nextSceneButtonX = width - (menuInventoryButtonWidth/2) - menuPadding
 let nextSceneButtonY = menuPadding + (nextSceneButtonHeight/2)
 let nextSceneButtonTextHeight = nextSceneButtonHeight - (menuPadding*2)
 let nextSceneButtonTextWidth = nextSceneButtonWidth - (menuPadding*2)

@@ -768,7 +768,8 @@ func createInventoryMenu() -> SKNode {
                 
                 // TODO: more info btn
                 
-                // TODO: number of owns
+                // number of owns
+				print("Own: " + String(item.owns))
 				let owns = createLabelFillRect(name: n, text: "Own: " + String(item.owns), width: inventoryCardOwnsWidth, height: inventoryCardOwnsHeight, x: runningX, y: inventoryCardOwnsY, textColor: colorInventoryCardTitle)
 				itemCard.addChild(owns)
                 

@@ -62,10 +62,12 @@ class SceneBase: SKScene {
         // set scene values
         moneyTotal += levelData[currentLevel].moneyAddValue
 		moneyGoal = moneyTotal
+		moneyTmp = moneyTotal
         // TODO: animation that adds money for each level
 		
 		for t in traitsDataOrigin {
 			t.valueGoal = t.value
+			t.valueTmp = t.value
 		}
         
         
@@ -230,32 +232,30 @@ class SceneBase: SKScene {
 			
 			// compare money, if not equal, need to change
 			// TODO: fix this - show int not float
-			if moneyGoal < moneyTotal {
-				//print("moneyGoal: " + String(moneyGoal) + " moneyTotal: " + String(moneyTotal))
-				if(moneyGoal != moneyTotal) {
-					// decrement the money model
-					moneyTotal -= changingStatsMoneyDecrement
-					
-					// display this new money model data
-					let moneyNode: SKLabelNode = (sceneNode_itemDetailPopup.childNodeWithName("//" + changingStatsMoneyNodeName)) as! SKLabelNode
-					moneyNode.text = "Money: " + String(moneyTotal)
-				}
+			if moneyGoal < moneyTmp {
+				//print("moneyGoal: " + String(moneyGoal) + " moneyTotal: " + String(moneyTotal) + " moneyTmp: " + String(moneyTmp))
+				// decrement the money model
+				moneyTmp -= changingStatsMoneyDecrement
+				
+				// display this new money model data
+				let moneyNode: SKLabelNode = (sceneNode_itemDetailPopup.childNodeWithName("//" + changingStatsMoneyNodeName)) as! SKLabelNode
+				moneyNode.text = "Money: " + String(moneyTmp)
 			}
 			
 			// compare traits, update them
 			for trait in traitsDataOrigin {
-				if(trait.value < trait.valueGoal) {
+				if(trait.valueTmp < trait.valueGoal) {
 					// change value
-					trait.value += changingStatsTraitIncrement
+					trait.valueTmp += changingStatsTraitIncrement
 				}
-				if(trait.value > trait.valueGoal) {
+				if(trait.valueTmp > trait.valueGoal) {
 					// change value
-					trait.value -= changingStatsTraitIncrement
+					trait.valueTmp -= changingStatsTraitIncrement
 				}
 				
 				// display model data
 				let traitNode = (sceneNode_itemDetailPopup.childNodeWithName("//" + trait.name + changingStatsTraitSuffix)) as! SKSpriteNode
-				let newLevelWidth = calcBarWidth(maxWidth: changingStatsTraitWidth, currentValue: trait.value, maxValue: trait.max)
+				let newLevelWidth = calcBarWidth(maxWidth: changingStatsTraitWidth, currentValue: trait.valueTmp, maxValue: trait.max)
 				traitNode.size = CGSize(width: newLevelWidth, height: changingStatsTraitHeight)
 				traitNode.position = CGPoint(x: changingStatsTraitXLeft + (newLevelWidth/2), y: traitNode.position.y)
 			}
@@ -359,6 +359,7 @@ class SceneBase: SKScene {
         
         // remove inventory menu from screen
         sceneNode_inventory.removeFromParent()
+		sceneNode_inventory.removeAllChildren()
     }
     
     func runAction_SelectInventoryItem(item item: Item) {
@@ -497,14 +498,16 @@ class SceneBase: SKScene {
 		
 		// ACTUALLY CHANGE DATA MODELS - we do this after so model data doesn't get in the way of changing stats data
 		// traits
-		/*var key = 0
+		var key = 0
 		for traitValueChange in itemSelected.traitValueChanges {
 			traitsDataOrigin[key].value += traitValueChange
+			traitsDataOrigin[key].valueTmp = traitsDataOrigin[key].value
 			key += 1
 		}
 		
 		// money
-		moneyTotal -= itemSelected.detailCost*/
+		moneyTotal -= itemSelected.detailCost
+		moneyTmp = moneyTotal
 		
 		
 		// save the new item and stats to plist
@@ -594,11 +597,13 @@ class SceneBase: SKScene {
 		
 		// update money goals
 		moneyGoal -= itemSelected.detailCost
+		moneyTmp = moneyTotal
 		
 		// update trait goals
 		var key = 0
 		for trait in traitsDataOrigin {
 			trait.valueGoal += itemSelected.traitValueChanges[key]
+			trait.valueTmp = trait.value
 			key += 1
 		}
 		
